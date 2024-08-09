@@ -6,10 +6,10 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/backgroundlogin"
-    tools:context=".login" >
+    tools:context=".Login" >
 
     <ImageView
-        android:id="@+id/imageView2"
+        android:id="@+id/boxLogin"
         android:layout_width="399dp"
         android:layout_height="475dp"
         android:layout_marginStart="28dp"
@@ -24,17 +24,17 @@
         app:srcCompat="@drawable/boxlogin" />
 
     <ImageView
-        android:id="@+id/imageView4"
+        android:id="@+id/jardineiraLogin"
         android:layout_width="333dp"
         android:layout_height="427dp"
         android:layout_marginStart="-362dp"
         android:layout_marginBottom="-245dp"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView2"
+        app:layout_constraintBottom_toTopOf="@+id/boxLogin"
+        app:layout_constraintStart_toEndOf="@+id/boxLogin"
         app:srcCompat="@drawable/jardineiralogin" />
 
     <androidx.appcompat.widget.AppCompatButton
-        android:id="@+id/button2"
+        android:id="@+id/btnEntrar"
         android:layout_width="200dp"
         android:layout_height="50dp"
         android:layout_marginStart="-300dp"
@@ -48,10 +48,10 @@
         android:textSize="20sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2" />
+        app:layout_constraintStart_toEndOf="@+id/boxLogin" />
 
     <EditText
-        android:id="@+id/editTextText5"
+        android:id="@+id/inputUsuario"
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:layout_marginStart="-280dp"
@@ -66,11 +66,11 @@
         android:textColorHint="#FFFFFF"
         android:textSize="24sp"
         android:textStyle="bold"
-        app:layout_constraintBottom_toTopOf="@+id/imageView2"
-        app:layout_constraintStart_toEndOf="@+id/imageView4" />
+        app:layout_constraintBottom_toTopOf="@+id/boxLogin"
+        app:layout_constraintStart_toEndOf="@+id/jardineiraLogin" />
 
     <EditText
-        android:id="@+id/editTextText6"
+        android:id="@+id/inputSenha"
         android:layout_width="220dp"
         android:layout_height="50dp"
         android:layout_marginStart="-310dp"
@@ -86,10 +86,10 @@
         android:textSize="24sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView2" />
+        app:layout_constraintStart_toEndOf="@+id/boxLogin" />
 
     <TextView
-        android:id="@+id/textView4"
+        android:id="@+id/textLogin"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="-215dp"
@@ -100,6 +100,6 @@
         android:textSize="34sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/imageView4" />
+        app:layout_constraintStart_toEndOf="@+id/jardineiraLogin" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

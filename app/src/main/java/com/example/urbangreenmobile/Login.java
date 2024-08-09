@@ -10,13 +10,13 @@ import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
-public class telaPrincipal extends AppCompatActivity {
+public class Login extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         EdgeToEdge.enable(this);
-        setContentView(R.layout.tela_principal);
+        setContentView(R.layout.tela_login);
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
@@ -24,8 +24,8 @@ public class telaPrincipal extends AppCompatActivity {
         });
     }
 
-    public void sair(View view) {
-        Intent in = new Intent(telaPrincipal.this, login.class);
+    public void telaprincipal(View view) {
+        Intent in = new Intent(Login.this, TelaPrincipal.class);
         startActivity(in);
     }
 }
