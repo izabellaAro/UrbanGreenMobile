@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_fornecedores"
+        android:icon="@drawable/iconefornecedores"
+        android:title="@string/title_fornecedores"/>
+
+    <item
+        android:id="@+id/nav_estoque"
+        android:icon="@drawable/iconeestoque"
+        android:title="@string/title_estoque"/>
+
+    <item
+        android:id="@+id/nav_producao"
+        android:icon="@drawable/iconeproducao"
+        android:title="@string/title_producao"/>
+
+    <item
+        android:id="@+id/nav_venda"
+        android:icon="@drawable/iconevendas"
+        android:title="@string/title_venda"/>
+
+    <item
+        android:id="@+id/nav_pedidos"
+        android:icon="@drawable/iconepedidos"
+        android:title="@string/title_pedidos"/>
+</menu>

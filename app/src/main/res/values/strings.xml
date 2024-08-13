@@ -1,4 +1,11 @@
 <resources>
     <string name="app_name">urbanGreenMobile</string>
     <string name="principal">Principal</string>
+    <string name="title_fornecedores">Fornecedores</string>
+    <string name="title_estoque">Estoque</string>
+    <string name="title_producao">Produção</string>
+    <string name="title_venda">Venda</string>
+    <string name="title_pedidos">Pedidos</string>
+    <string name="btn_menu_description">Abrir menu lateral</string>
+    <string name="btn_sair_description">Sair do aplicativo</string>
 </resources>
