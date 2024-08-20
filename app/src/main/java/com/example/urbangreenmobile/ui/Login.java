@@ -82,6 +82,6 @@ public class Login extends AppCompatActivity {
     private void telaprincipal() {
         Intent in = new Intent(Login.this, TelaPrincipal.class);
         startActivity(in);
-        //finish(); //
+        finish();
     }
 }

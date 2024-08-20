@@ -25,13 +25,14 @@
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".ui.TelaPrincipal"
-            android:exported="false" />
+        <activity android:name=".ui.TelaFornecedores"/>
+        <activity android:name=".ui.TelaPrincipal"/>
 
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
+
     </application>
 
 </manifest>

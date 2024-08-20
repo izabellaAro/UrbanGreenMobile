@@ -2,6 +2,7 @@ package com.example.urbangreenmobile.ui;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.MenuItem;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
@@ -12,6 +13,7 @@ import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
 
 import com.example.urbangreenmobile.R;
+import com.google.android.material.navigation.NavigationView;
 
 public class TelaPrincipal extends AppCompatActivity {
 
@@ -24,6 +26,7 @@ public class TelaPrincipal extends AppCompatActivity {
         setContentView(R.layout.tela_principal);
 
         drawerLayout = findViewById(R.id.drawer_layout);
+        NavigationView navigationView = findViewById(R.id.nav_view);
 
         ViewCompat.setOnApplyWindowInsetsListener(findViewById(R.id.main), (v, insets) -> {
             Insets systemBars = insets.getInsets(WindowInsetsCompat.Type.systemBars());
@@ -32,7 +35,23 @@ public class TelaPrincipal extends AppCompatActivity {
         });
 
         findViewById(R.id.btnMenu).setOnClickListener(v -> {
-            drawerLayout.openDrawer(findViewById(R.id.nav_view));
+            drawerLayout.openDrawer(navigationView);
+        });
+
+        navigationView.setNavigationItemSelectedListener(new NavigationView.OnNavigationItemSelectedListener() {
+            @Override
+            public boolean onNavigationItemSelected(MenuItem item) {
+                int id = item.getItemId();
+
+                if (id == R.id.nav_fornecedores) {
+                    Intent intent = new Intent(TelaPrincipal.this, TelaFornecedores.class);
+                    startActivity(intent);
+                    drawerLayout.closeDrawers();
+                    return true;
+                }
+
+                return false;
+            }
         });
     }
 
@@ -41,3 +60,5 @@ public class TelaPrincipal extends AppCompatActivity {
         startActivity(in);
     }
 }
+
+
