@@ -8,19 +8,18 @@ import android.widget.Filterable;
 import android.widget.ImageButton;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.models.Fornecedor;
+import com.example.urbangreenmobile.api.models.Fornecedor.GetFornecedorResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class TelaFornecedorAdapter extends RecyclerView.Adapter<TelaFornecedorAdapter.FornecedorViewHolder> implements Filterable {
 
-    private List<Fornecedor> fornecedores = new ArrayList<>();
-    private List<Fornecedor> fornecedoresFull;
+    private List<GetFornecedorResponse> fornecedores = new ArrayList<>();
+    private List<GetFornecedorResponse> fornecedoresFull;
 
     @Override
     public FornecedorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -31,7 +30,7 @@ public class TelaFornecedorAdapter extends RecyclerView.Adapter<TelaFornecedorAd
 
     @Override
     public void onBindViewHolder(FornecedorViewHolder holder, int position) {
-        Fornecedor fornecedor = fornecedores.get(position);
+        GetFornecedorResponse fornecedor = fornecedores.get(position);
         holder.nomePJ.setText(fornecedor.getNomePJ());
         holder.nomeFornecedor.setText(fornecedor.getNome());
         holder.email.setText(fornecedor.getEmail());
@@ -39,6 +38,8 @@ public class TelaFornecedorAdapter extends RecyclerView.Adapter<TelaFornecedorAd
         holder.insumoName.setText(fornecedor.getInsumo());
         double preco = fornecedor.getValor();
         holder.preco.setText(String.format("R$ %.2f", preco));
+
+
     }
 
     @Override
@@ -46,7 +47,7 @@ public class TelaFornecedorAdapter extends RecyclerView.Adapter<TelaFornecedorAd
         return fornecedores.size();
     }
 
-    public void setFornecedores(List<Fornecedor> fornecedores) {
+    public void setFornecedores(List<GetFornecedorResponse> fornecedores) {
         this.fornecedores = fornecedores;
         fornecedoresFull = new ArrayList<>(fornecedores);
         notifyDataSetChanged();
@@ -60,14 +61,14 @@ public class TelaFornecedorAdapter extends RecyclerView.Adapter<TelaFornecedorAd
     private Filter fornecedorFilter = new Filter() {
         @Override
         protected FilterResults performFiltering(CharSequence constraint) {
-            List<Fornecedor> filteredList = new ArrayList<>();
+            List<GetFornecedorResponse> filteredList = new ArrayList<>();
 
             if (constraint == null || constraint.length() == 0) {
                 filteredList.addAll(fornecedoresFull);
             } else {
                 String filterPattern = constraint.toString().toLowerCase().trim();
 
-                for (Fornecedor item : fornecedoresFull) {
+                for (GetFornecedorResponse item : fornecedoresFull) {
                     if (item.getNomePJ().toLowerCase().contains(filterPattern) ||
                             item.getInsumo().toLowerCase().contains(filterPattern) ||
                             item.getNome().toLowerCase().contains(filterPattern)) {

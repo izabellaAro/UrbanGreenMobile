@@ -31,12 +31,30 @@
         android:layout_marginTop="16dp">
 
         <EditText
-            android:id="@+id/input_empresa"
+            android:id="@+id/input_rzSocial"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Razão Social"
+            android:background="@drawable/background_inputtext"
+            android:padding="8dp"/>
+
+        <EditText
+            android:id="@+id/input_cnpj"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="CNPJ"
+            android:background="@drawable/background_inputtext"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/input_nomeFantasia"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:hint="Empresa"
             android:background="@drawable/background_inputtext"
-            android:padding="8dp"/>
+            android:padding="8dp"
+            android:layout_marginTop="8dp"/>
 
         <EditText
             android:id="@+id/input_responsavel"
@@ -74,20 +92,12 @@
             android:padding="8dp"
             android:layout_marginTop="8dp"/>
 
-        <EditText
-            android:id="@+id/input_valor"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Valor pago por tonelada"
-            android:background="@drawable/background_inputtext"
-            android:padding="8dp"
-            android:layout_marginTop="8dp"/>
     </LinearLayout>
 
     <ImageButton
         android:id="@+id/btn_salvar"
         android:layout_width="120dp"
-        android:layout_height="30dp"
+        android:layout_height="40dp"
         android:layout_centerHorizontal="true"
         android:layout_below="@id/input_fields"
         android:layout_marginTop="16dp"

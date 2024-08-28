@@ -1,8 +1,9 @@
 package com.example.urbangreenmobile.api;
 
-import com.example.urbangreenmobile.api.models.Fornecedor;
-import com.example.urbangreenmobile.api.models.LoginRequest;
-import com.example.urbangreenmobile.api.models.LoginResponse;
+import com.example.urbangreenmobile.api.models.Fornecedor.CreateFornecedorRequest;
+import com.example.urbangreenmobile.api.models.Fornecedor.GetFornecedorResponse;
+import com.example.urbangreenmobile.api.models.Login.LoginRequest;
+import com.example.urbangreenmobile.api.models.Login.LoginResponse;
 
 import java.util.List;
 
@@ -16,5 +17,9 @@ public interface ApiInterface {
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
     @GET("Fornecedor?skip=0&take=50")
-    Call<List<Fornecedor>> getFornecedores();
+    Call<List<GetFornecedorResponse>> getFornecedores();
+
+    @POST("Fornecedor")
+    Call<Void> criarFornecedor(@Body CreateFornecedorRequest fornecedor);
+
 }

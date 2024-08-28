@@ -15,7 +15,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.urbangreenmobile.R;
 import com.example.urbangreenmobile.api.ApiInterface;
 import com.example.urbangreenmobile.api.ApiService;
-import com.example.urbangreenmobile.api.models.Fornecedor;
+import com.example.urbangreenmobile.api.models.Fornecedor.CreateFornecedorRequest;
+import com.example.urbangreenmobile.api.models.Fornecedor.GetFornecedorResponse;
+import com.example.urbangreenmobile.api.models.Fornecedor.PessoaJuridica;
 import com.example.urbangreenmobile.utils.TokenManager;
 
 import java.util.List;
@@ -30,7 +32,7 @@ public class TelaFornecedores extends AppCompatActivity {
     private TokenManager tokenManager;
     private RecyclerView recyclerViewFornecedores;
     private TelaFornecedorAdapter fornecedorAdapter;
-    private List<Fornecedor> fornecedorList;
+    private List<GetFornecedorResponse> fornecedorList;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -66,21 +68,82 @@ public class TelaFornecedores extends AppCompatActivity {
 
         ImageButton buttonAdd = findViewById(R.id.add_fornecedor_button);
         buttonAdd.setOnClickListener(v -> {
-            Dialog dialog = new Dialog(TelaFornecedores.this);
-            dialog.setContentView(R.layout.editar_fornecedor);
+            abrirDialogFornecedor(null);
+        });
+    }
 
-            ImageButton closeButton = dialog.findViewById(R.id.close_button);
-            closeButton.setOnClickListener(v1 -> dialog.dismiss());
+    private void abrirDialogFornecedor(GetFornecedorResponse fornecedor) {
+        Dialog dialog = new Dialog(TelaFornecedores.this);
+        dialog.setContentView(R.layout.editar_fornecedor);
 
-            dialog.show();
+        EditText inputEmpresa = dialog.findViewById(R.id.input_rzSocial);
+        EditText inputCnpj = dialog.findViewById(R.id.input_cnpj);
+        EditText inputNomeFant = dialog.findViewById(R.id.input_nomeFantasia);
+        EditText inputResponsavel = dialog.findViewById(R.id.input_responsavel);
+        EditText inputTelefone = dialog.findViewById(R.id.input_telefone);
+        EditText inputEmail = dialog.findViewById(R.id.input_email);
+        EditText inputProduto = dialog.findViewById(R.id.input_produto);
+
+        ImageButton btnSalvar = dialog.findViewById(R.id.btn_salvar);
+        ImageButton closeButton = dialog.findViewById(R.id.close_button);
+
+        if (fornecedor != null) {
+            inputEmpresa.setText(fornecedor.getNomePJ());
+            inputResponsavel.setText(fornecedor.getNome());
+            inputTelefone.setText(fornecedor.getTelefone());
+            inputEmail.setText(fornecedor.getEmail());
+            inputProduto.setText(fornecedor.getInsumo());
+        }
+
+        closeButton.setOnClickListener(v1 -> dialog.dismiss());
+
+        btnSalvar.setOnClickListener(v -> {
+            PessoaJuridica pessoaJuridica = new PessoaJuridica(
+                    inputNomeFant.getText().toString(),
+                    inputCnpj.getText().toString(),
+                    inputEmpresa.getText().toString(),
+                    inputEmail.getText().toString(),
+                    inputTelefone.getText().toString()
+            );
+
+            CreateFornecedorRequest novoFornecedor = new CreateFornecedorRequest();
+            novoFornecedor.setNome(inputResponsavel.getText().toString());
+            novoFornecedor.setInsumoId(Integer.parseInt(inputProduto.getText().toString()));
+            novoFornecedor.setPessoaJuridica(pessoaJuridica);
+
+            criarFornecedor(novoFornecedor);
+
+            dialog.dismiss();
+        });
+
+        dialog.show();
+    }
+
+    private void criarFornecedor(CreateFornecedorRequest fornecedor) {
+        Call<Void> call = apiInterface.criarFornecedor(fornecedor);
+        call.enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    listarFornecedores();
+                    Toast.makeText(TelaFornecedores.this, "Fornecedor criado com sucesso", Toast.LENGTH_SHORT).show();
+                } else {
+                    Toast.makeText(TelaFornecedores.this, "Erro ao criar fornecedor", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(TelaFornecedores.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+            }
         });
     }
 
     private void listarFornecedores() {
-        Call<List<Fornecedor>> call = apiInterface.getFornecedores();
-        call.enqueue(new Callback<List<Fornecedor>>() {
+        Call<List<GetFornecedorResponse>> call = apiInterface.getFornecedores();
+        call.enqueue(new Callback<List<GetFornecedorResponse>>() {
             @Override
-            public void onResponse(Call<List<Fornecedor>> call, Response<List<Fornecedor>> response) {
+            public void onResponse(Call<List<GetFornecedorResponse>> call, Response<List<GetFornecedorResponse>> response) {
                 if (response.isSuccessful()) {
                     fornecedorList = response.body();
                     fornecedorAdapter.setFornecedores(fornecedorList);
@@ -90,11 +153,9 @@ public class TelaFornecedores extends AppCompatActivity {
             }
 
             @Override
-            public void onFailure(Call<List<Fornecedor>> call, Throwable t) {
+            public void onFailure(Call<List<GetFornecedorResponse>> call, Throwable t) {
                 Toast.makeText(TelaFornecedores.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }
-
-    // Implementar métodos para criar, atualizar e deletar fornecedores
 }
