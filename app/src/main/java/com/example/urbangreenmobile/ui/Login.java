@@ -15,8 +15,8 @@ import androidx.core.view.WindowInsetsCompat;
 import com.example.urbangreenmobile.R;
 import com.example.urbangreenmobile.api.ApiService;
 import com.example.urbangreenmobile.api.ApiInterface;
-import com.example.urbangreenmobile.api.models.LoginRequest;
-import com.example.urbangreenmobile.api.models.LoginResponse;
+import com.example.urbangreenmobile.api.models.Login.LoginRequest;
+import com.example.urbangreenmobile.api.models.Login.LoginResponse;
 import com.example.urbangreenmobile.utils.TokenManager;
 
 import retrofit2.Call;

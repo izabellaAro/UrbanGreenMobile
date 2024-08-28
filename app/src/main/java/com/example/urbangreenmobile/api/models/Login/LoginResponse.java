@@ -1,4 +1,4 @@
-package com.example.urbangreenmobile.api.models;
+package com.example.urbangreenmobile.api.models.Login;
 
 public class LoginResponse {
     private String token;
