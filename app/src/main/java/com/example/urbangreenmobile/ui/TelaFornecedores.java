@@ -4,8 +4,10 @@ import android.app.Dialog;
 import android.os.Bundle;
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.ImageButton;
+import android.widget.Spinner;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -18,6 +20,7 @@ import com.example.urbangreenmobile.api.ApiService;
 import com.example.urbangreenmobile.api.models.Fornecedor.CreateFornecedorRequest;
 import com.example.urbangreenmobile.api.models.Fornecedor.GetFornecedorResponse;
 import com.example.urbangreenmobile.api.models.Fornecedor.PessoaJuridica;
+import com.example.urbangreenmobile.api.models.Insumo.GetInsumoResponse;
 import com.example.urbangreenmobile.utils.TokenManager;
 
 import java.util.List;
@@ -82,7 +85,7 @@ public class TelaFornecedores extends AppCompatActivity {
         EditText inputResponsavel = dialog.findViewById(R.id.input_responsavel);
         EditText inputTelefone = dialog.findViewById(R.id.input_telefone);
         EditText inputEmail = dialog.findViewById(R.id.input_email);
-        EditText inputProduto = dialog.findViewById(R.id.input_produto);
+        Spinner spinnerInsumos = dialog.findViewById(R.id.spinner_insumos);
 
         ImageButton btnSalvar = dialog.findViewById(R.id.btn_salvar);
         ImageButton closeButton = dialog.findViewById(R.id.close_button);
@@ -92,8 +95,9 @@ public class TelaFornecedores extends AppCompatActivity {
             inputResponsavel.setText(fornecedor.getNome());
             inputTelefone.setText(fornecedor.getTelefone());
             inputEmail.setText(fornecedor.getEmail());
-            inputProduto.setText(fornecedor.getInsumo());
         }
+
+        carregarInsumos(spinnerInsumos);
 
         closeButton.setOnClickListener(v1 -> dialog.dismiss());
 
@@ -106,9 +110,12 @@ public class TelaFornecedores extends AppCompatActivity {
                     inputTelefone.getText().toString()
             );
 
+            GetInsumoResponse selectedInsumo = (GetInsumoResponse) spinnerInsumos.getSelectedItem();
+            int insumoId = selectedInsumo.getId();
+
             CreateFornecedorRequest novoFornecedor = new CreateFornecedorRequest();
             novoFornecedor.setNome(inputResponsavel.getText().toString());
-            novoFornecedor.setInsumoId(Integer.parseInt(inputProduto.getText().toString()));
+            novoFornecedor.setInsumoId(insumoId);
             novoFornecedor.setPessoaJuridica(pessoaJuridica);
 
             criarFornecedor(novoFornecedor);
@@ -154,6 +161,29 @@ public class TelaFornecedores extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<GetFornecedorResponse>> call, Throwable t) {
+                Toast.makeText(TelaFornecedores.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
+    private void carregarInsumos(Spinner spinnerInsumos) {
+        Call<List<GetInsumoResponse>> call = apiInterface.getInsumos();
+        call.enqueue(new Callback<List<GetInsumoResponse>>() {
+            @Override
+            public void onResponse(Call<List<GetInsumoResponse>> call, Response<List<GetInsumoResponse>> response) {
+                if (response.isSuccessful() && response.body() != null) {
+                    List<GetInsumoResponse> insumos = response.body();
+                    ArrayAdapter<GetInsumoResponse> adapter = new ArrayAdapter<>(TelaFornecedores.this,
+                            android.R.layout.simple_spinner_item, insumos);
+                    adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+                    spinnerInsumos.setAdapter(adapter);
+                } else {
+                    Toast.makeText(TelaFornecedores.this, "Erro ao carregar insumos", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<GetInsumoResponse>> call, Throwable t) {
                 Toast.makeText(TelaFornecedores.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });

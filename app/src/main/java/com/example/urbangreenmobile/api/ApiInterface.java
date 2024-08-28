@@ -2,6 +2,7 @@ package com.example.urbangreenmobile.api;
 
 import com.example.urbangreenmobile.api.models.Fornecedor.CreateFornecedorRequest;
 import com.example.urbangreenmobile.api.models.Fornecedor.GetFornecedorResponse;
+import com.example.urbangreenmobile.api.models.Insumo.GetInsumoResponse;
 import com.example.urbangreenmobile.api.models.Login.LoginRequest;
 import com.example.urbangreenmobile.api.models.Login.LoginResponse;
 
@@ -21,5 +22,8 @@ public interface ApiInterface {
 
     @POST("Fornecedor")
     Call<Void> criarFornecedor(@Body CreateFornecedorRequest fornecedor);
+
+    @GET("Insumo?skip=0&take=50")
+    Call<List<GetInsumoResponse>> getInsumos();
 
 }

@@ -83,11 +83,11 @@
             android:padding="8dp"
             android:layout_marginTop="8dp"/>
 
-        <EditText
-            android:id="@+id/input_produto"
+        <Spinner
+            android:id="@+id/spinner_insumos"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:hint="Produto"
+            android:prompt="@string/spinner_insumos"
             android:background="@drawable/background_inputtext"
             android:padding="8dp"
             android:layout_marginTop="8dp"/>
