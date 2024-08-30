@@ -1,6 +1,7 @@
 package com.example.urbangreenmobile.api.models.Fornecedor;
 
 public class GetFornecedorResponse {
+    private int fornecedorId;
     private String nome;
     private String nomePJ;
     private String insumo;
@@ -8,7 +9,8 @@ public class GetFornecedorResponse {
     public String email;
     public double valor;
 
-    public GetFornecedorResponse(String nomePJ, String insumo, String telefone, String email, double valor){
+    public GetFornecedorResponse(String nomePJ, String insumo, String telefone, String email, double valor, int id){
+        this.fornecedorId = id;
         this.nome = nome;
         this.nomePJ = nomePJ;
         this.insumo = insumo;
@@ -41,6 +43,10 @@ public class GetFornecedorResponse {
 
     public double getValor(){
         return valor;
+    }
+
+    public int getId(){
+        return fornecedorId;
     }
 
 }

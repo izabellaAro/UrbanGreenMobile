@@ -20,6 +20,15 @@ public class TelaFornecedorAdapter extends RecyclerView.Adapter<TelaFornecedorAd
 
     private List<GetFornecedorResponse> fornecedores = new ArrayList<>();
     private List<GetFornecedorResponse> fornecedoresFull;
+    private OnEditClickListener onEditClickListener;
+
+    public interface OnEditClickListener {
+        void onEditClick(GetFornecedorResponse fornecedor);
+    }
+
+    public void setOnEditClickListener(OnEditClickListener onEditClickListener) {
+        this.onEditClickListener = onEditClickListener;
+    }
 
     @Override
     public FornecedorViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
@@ -39,7 +48,11 @@ public class TelaFornecedorAdapter extends RecyclerView.Adapter<TelaFornecedorAd
         double preco = fornecedor.getValor();
         holder.preco.setText(String.format("R$ %.2f", preco));
 
-
+        holder.editButton.setOnClickListener(v -> {
+            if (onEditClickListener != null) {
+                onEditClickListener.onEditClick(fornecedor);
+            }
+        });
     }
 
     @Override
