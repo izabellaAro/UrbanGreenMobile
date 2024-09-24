@@ -6,6 +6,7 @@ import android.view.MenuItem;
 import android.view.View;
 
 import androidx.activity.EdgeToEdge;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.graphics.Insets;
 import androidx.core.view.ViewCompat;
@@ -50,9 +51,29 @@ public class TelaPrincipal extends AppCompatActivity {
                     return true;
                 }
 
+                if(id == R.id.nav_estoque){
+                    showSubMenuDialog();
+                    return true;
+                }
+
                 return false;
             }
         });
+    }
+
+    private void showSubMenuDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setTitle("Escolha uma opção")
+                .setItems(new CharSequence[]{"Produtos", "Insumos"}, (dialog, which) -> {
+                    switch (which) {
+                        case 0: // Produtos
+                            Intent intentProdutos = new Intent(TelaPrincipal.this, TelaProdutos.class);
+                            startActivity(intentProdutos);
+                            break;
+
+                    }
+                });
+        builder.create().show();
     }
 
     public void sair(View view) {

@@ -6,11 +6,14 @@ import com.example.urbangreenmobile.api.models.Fornecedor.UpdateFornecedorReques
 import com.example.urbangreenmobile.api.models.Insumo.GetInsumoResponse;
 import com.example.urbangreenmobile.api.models.Login.LoginRequest;
 import com.example.urbangreenmobile.api.models.Login.LoginResponse;
+import com.example.urbangreenmobile.api.models.Produto.GetProdutoResponse;
 
 import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.http.Body;
+import retrofit2.http.Field;
+import retrofit2.http.FormUrlEncoded;
 import retrofit2.http.POST;
 import retrofit2.http.GET;
 import retrofit2.http.PUT;
@@ -31,4 +34,25 @@ public interface ApiInterface {
 
     @PUT("Fornecedor/{id}")
     Call<Void> atualizarFornecedor(@Path("id") int id, @Body UpdateFornecedorRequest fornecedor);
+
+    @GET("Produto?skip=0&take=50")
+    Call<List<GetProdutoResponse>> getProdutos();
+
+    @FormUrlEncoded
+    @POST("Produto")
+    Call<Void> criarProduto(
+            @Field("nome") String nome,
+            @Field("quantidade") int quantidade,
+            @Field("valor") double valor
+    );
+
+    @FormUrlEncoded
+    @PUT("Produto/{id}")
+    Call<Void> atualizarProduto(
+            @Path("id") int id,
+            @Field("nome") String nome,
+            @Field("quantidade") int quantidade,
+            @Field("valor") double valor
+    );
+
 }

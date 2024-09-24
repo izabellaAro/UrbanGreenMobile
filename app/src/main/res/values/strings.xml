@@ -3,6 +3,8 @@
     <string name="principal">Principal</string>
     <string name="title_fornecedores">Fornecedores</string>
     <string name="title_estoque">Estoque</string>
+    <string name="title_produtos">Produtos</string>
+    <string name="title_insumos">Insumos</string>
     <string name="title_producao">Produção</string>
     <string name="title_venda">Venda</string>
     <string name="title_pedidos">Pedidos</string>

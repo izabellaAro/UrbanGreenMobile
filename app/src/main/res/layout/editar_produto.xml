@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="500dp"
+    android:padding="30dp"
+    android:background="@drawable/background_cardedit">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar/Adicionar Produto"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/iconefechar"
+        android:contentDescription="Fechar"/>
+
+    <LinearLayout
+        android:id="@+id/input_fields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/dialog_title"
+        android:layout_marginTop="16dp">
+
+        <EditText
+            android:id="@+id/input_produto"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Produto"
+            android:background="@drawable/background_inputtext"
+            android:padding="8dp"/>
+
+        <EditText
+            android:id="@+id/input_quantidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Quantidade"
+            android:background="@drawable/background_inputtext"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/input_valor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Valor"
+            android:background="@drawable/background_inputtext"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <Button
+            android:id="@+id/btn_selecionar_imagem"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:backgroundTint="@color/greenn"
+            android:text="Selecionar Imagem"
+            android:layout_marginTop="16dp"/>
+
+        <ImageView
+            android:id="@+id/imagem_produto"
+            android:layout_width="100dp"
+            android:layout_height="100dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginStart="120dp"
+            android:scaleType="centerCrop"
+            android:contentDescription="Imagem do Produto"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_salvar"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/input_fields"
+        android:background="@drawable/btnsalvar"/>
+</RelativeLayout>
