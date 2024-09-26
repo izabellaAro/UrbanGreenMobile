@@ -5,6 +5,7 @@
     android:layout_height="200dp"
     android:orientation="vertical"
     android:padding="10dp"
+    android:layout_marginStart="12dp"
     android:layout_marginTop="20dp"
     android:background="@drawable/background_carditem">
 
@@ -39,7 +40,10 @@
 
     <ImageButton
         android:id="@+id/item_edit_button"
-        android:layout_width="10dp"
-        android:layout_height="10dp"
-        android:src="@drawable/iconeditar" />
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="110dp"
+        android:layout_marginTop="-180dp"
+        android:src="@drawable/iconeditar"
+        android:background="@android:color/transparent"/>
 </LinearLayout>
