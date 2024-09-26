@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="150dp"
+    android:layout_height="150dp"
+    android:orientation="vertical"
+    android:padding="10dp"
+    android:layout_marginTop="20dp"
+    android:background="@drawable/background_carditem">
+
+    <TextView
+        android:id="@+id/item_nome"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Nome do Item"
+        android:textSize="16sp"
+        android:textStyle="bold"
+        android:layout_marginTop="26dp" />
+
+    <TextView
+        android:id="@+id/item_quantidade"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Quantidade"
+        android:layout_marginTop="4dp" />
+
+    <TextView
+        android:id="@+id/item_preco"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Preço"
+        android:layout_marginTop="4dp" />
+
+    <ImageButton
+        android:id="@+id/item_edit_button"
+        android:layout_width="20dp"
+        android:layout_height="20dp"
+        android:layout_marginStart="104dp"
+        android:layout_marginTop="-96dp"
+        android:src="@drawable/iconeditar"
+        android:background="@android:color/transparent"/>
+</LinearLayout>

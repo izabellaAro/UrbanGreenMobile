@@ -1,14 +1,14 @@
 package com.example.urbangreenmobile.api.models.Insumo;
 
-public class GetInsumoResponse {
+public class UpdateInsumoRequest {
     private int id;
     private String nome;
     private int quantidade;
     private double valor;
 
-    public GetInsumoResponse() { }
+    public UpdateInsumoRequest() { }
 
-    public GetInsumoResponse(int id, String nome, int quantidade, double valor) {
+    public UpdateInsumoRequest(int id, String nome, int quantidade, double valor) {
         this.id = id;
         this.nome = nome;
         this.quantidade = quantidade;
@@ -45,10 +45,5 @@ public class GetInsumoResponse {
 
     public void setValor(double valor) {
         this.valor = valor;
-    }
-
-    @Override
-    public String toString() {
-        return nome;
     }
 }

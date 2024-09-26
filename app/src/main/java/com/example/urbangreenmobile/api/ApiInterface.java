@@ -3,7 +3,9 @@ package com.example.urbangreenmobile.api;
 import com.example.urbangreenmobile.api.models.Fornecedor.CreateFornecedorRequest;
 import com.example.urbangreenmobile.api.models.Fornecedor.GetFornecedorResponse;
 import com.example.urbangreenmobile.api.models.Fornecedor.UpdateFornecedorRequest;
+import com.example.urbangreenmobile.api.models.Insumo.CreateInsumoRequest;
 import com.example.urbangreenmobile.api.models.Insumo.GetInsumoResponse;
+import com.example.urbangreenmobile.api.models.Insumo.UpdateInsumoRequest;
 import com.example.urbangreenmobile.api.models.Login.LoginRequest;
 import com.example.urbangreenmobile.api.models.Login.LoginResponse;
 import com.example.urbangreenmobile.api.models.Produto.GetProdutoResponse;
@@ -29,9 +31,6 @@ public interface ApiInterface {
     @POST("Fornecedor")
     Call<Void> criarFornecedor(@Body CreateFornecedorRequest fornecedor);
 
-    @GET("Insumo?skip=0&take=50")
-    Call<List<GetInsumoResponse>> getInsumos();
-
     @PUT("Fornecedor/{id}")
     Call<Void> atualizarFornecedor(@Path("id") int id, @Body UpdateFornecedorRequest fornecedor);
 
@@ -55,4 +54,12 @@ public interface ApiInterface {
             @Field("valor") double valor
     );
 
+    @GET("Insumo?skip=0&take=50")
+    Call<List<GetInsumoResponse>> getInsumos();
+
+    @POST("Insumo")
+    Call<Void> criarInsumo(@Body CreateInsumoRequest insumo);
+
+    @PUT("Insumo/{id}")
+    Call<Void> atualizarInsumo(@Path("id") int id, @Body UpdateInsumoRequest insumo);
 }

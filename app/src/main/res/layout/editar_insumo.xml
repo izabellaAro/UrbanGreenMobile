@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="400dp"
+    android:padding="30dp"
+    android:background="@drawable/background_cardedit">
+
+    <TextView
+        android:id="@+id/dialog_title"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Editar/Adicionar Insumo"
+        android:textStyle="bold"
+        android:textSize="16sp"
+        android:layout_centerHorizontal="true" />
+
+    <ImageButton
+        android:id="@+id/close_button"
+        android:layout_width="18dp"
+        android:layout_height="18dp"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/iconefechar"
+        android:contentDescription="Fechar"/>
+
+    <LinearLayout
+        android:id="@+id/input_fields"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:layout_below="@id/dialog_title"
+        android:layout_marginTop="16dp">
+
+        <EditText
+            android:id="@+id/input_insumo"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Insumo"
+            android:background="@drawable/background_inputtext"
+            android:padding="8dp"/>
+
+        <EditText
+            android:id="@+id/input_quantidade"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Quantidade"
+            android:background="@drawable/background_inputtext"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"/>
+
+        <EditText
+            android:id="@+id/input_valor"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Valor"
+            android:background="@drawable/background_inputtext"
+            android:padding="8dp"
+            android:layout_marginTop="8dp"/>
+
+    </LinearLayout>
+
+    <ImageButton
+        android:id="@+id/btn_salvar"
+        android:layout_width="120dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="20dp"
+        android:layout_centerHorizontal="true"
+        android:layout_below="@id/input_fields"
+        android:background="@drawable/btnsalvar"/>
+</RelativeLayout>

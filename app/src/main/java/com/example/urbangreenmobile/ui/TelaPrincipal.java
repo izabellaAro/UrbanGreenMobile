@@ -70,7 +70,9 @@ public class TelaPrincipal extends AppCompatActivity {
                             Intent intentProdutos = new Intent(TelaPrincipal.this, TelaProdutos.class);
                             startActivity(intentProdutos);
                             break;
-
+                        case 1: // Insumos
+                            Intent intentInsumos = new Intent(TelaPrincipal.this, TelaInsumos.class);
+                            startActivity(intentInsumos);
                     }
                 });
         builder.create().show();

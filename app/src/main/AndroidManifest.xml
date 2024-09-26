@@ -28,6 +28,7 @@
         <activity android:name=".ui.TelaFornecedores"/>
         <activity android:name=".ui.TelaPrincipal"/>
         <activity android:name=".ui.TelaProdutos" />
+        <activity android:name=".ui.TelaInsumos" />
 
         <meta-data
             android:name="preloaded_fonts"
