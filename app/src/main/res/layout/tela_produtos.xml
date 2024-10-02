@@ -23,7 +23,7 @@
             android:src="@drawable/logo" />
 
         <TextView
-            android:id="@+id/text_estoque"
+            android:id="@+id/text_produto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="-10dp"
@@ -67,7 +67,7 @@
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/recyclerViewEstoque"
+        android:id="@+id/recyclerViewProduto"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:padding="10dp"

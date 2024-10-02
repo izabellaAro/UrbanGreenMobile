@@ -42,8 +42,8 @@
         android:id="@+id/item_edit_button"
         android:layout_width="20dp"
         android:layout_height="20dp"
-        android:layout_marginStart="110dp"
-        android:layout_marginTop="-180dp"
+        android:layout_marginStart="112dp"
+        android:layout_marginTop="-172dp"
         android:src="@drawable/iconeditar"
         android:background="@android:color/transparent"/>
 </LinearLayout>

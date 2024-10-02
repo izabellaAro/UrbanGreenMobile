@@ -1,5 +1,8 @@
 package com.example.urbangreenmobile.ui;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -21,7 +24,7 @@ import java.util.List;
 public class TelaProdutoAdapter extends RecyclerView.Adapter<TelaProdutoAdapter.EstoqueViewHolder> implements Filterable {
     private List<GetProdutoResponse> itemList = new ArrayList<>();
     private List<GetProdutoResponse> produtosFull;
-    private OnEditClickListener onEditClickListener;
+    private TelaProdutoAdapter.OnEditClickListener onEditClickListener;
 
     public interface OnEditClickListener {
         void onEditClick(GetProdutoResponse produto);
@@ -71,9 +74,9 @@ public class TelaProdutoAdapter extends RecyclerView.Adapter<TelaProdutoAdapter.
         holder.itemQuantity.setText("Qtd: " + currentItem.getQuantidade());
         holder.itemPrice.setText("Preço: " + currentItem.getValor());
 
-        Glide.with(holder.itemView.getContext())
-                .load(currentItem.getImagemUrl())
-                .into(holder.itemImage);
+        byte[] imageBytes = Base64.decode(currentItem.getImagemBase64(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        holder.itemImage.setImageBitmap(bitmap);
 
         holder.itemEditButton.setOnClickListener(v -> {
             if (onEditClickListener != null) {
