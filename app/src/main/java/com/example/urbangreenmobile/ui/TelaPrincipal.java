@@ -56,6 +56,13 @@ public class TelaPrincipal extends AppCompatActivity {
                     return true;
                 }
 
+                if(id == R.id.nav_producao){
+                    Intent intent = new Intent(TelaPrincipal.this, TelaProducao.class);
+                    startActivity(intent);
+                    drawerLayout.closeDrawers();
+                    return true;
+                }
+
                 return false;
             }
         });
