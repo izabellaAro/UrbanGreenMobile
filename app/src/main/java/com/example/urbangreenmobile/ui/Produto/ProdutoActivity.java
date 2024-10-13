@@ -1,6 +1,6 @@
-package com.example.urbangreenmobile.ui;
+package com.example.urbangreenmobile.ui.Produto;
 
-import static com.example.urbangreenmobile.ui.MultipartHelper.prepararArquivoImagem;
+import static com.example.urbangreenmobile.utils.MultipartHelper.prepararArquivoImagem;
 
 import android.app.Dialog;
 import android.content.Intent;
@@ -26,6 +26,7 @@ import com.example.urbangreenmobile.api.ApiService;
 import com.example.urbangreenmobile.api.models.Produto.CreateProdutoRequest;
 import com.example.urbangreenmobile.api.models.Produto.GetProdutoResponse;
 import com.example.urbangreenmobile.api.models.Produto.UpdateProdutoRequest;
+import com.example.urbangreenmobile.utils.MultipartHelper;
 import com.example.urbangreenmobile.utils.TokenManager;
 
 import java.io.IOException;
@@ -37,11 +38,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TelaProdutos extends AppCompatActivity {
+public class ProdutoActivity extends AppCompatActivity {
 
     private static final int PICK_IMAGE_REQUEST = 1;
     private RecyclerView recyclerViewEstoque;
-    private TelaProdutoAdapter itemAdapter;
+    private ProdutoAdapter itemAdapter;
     private ApiInterface apiInterface;
     private ImageView imagemProduto;
     private Bitmap imagemProdutoBitmap;
@@ -63,7 +64,7 @@ public class TelaProdutos extends AppCompatActivity {
         recyclerViewEstoque = findViewById(R.id.recyclerViewProduto);
         recyclerViewEstoque.setLayoutManager(new GridLayoutManager(this, 2));
 
-        itemAdapter = new TelaProdutoAdapter();
+        itemAdapter = new ProdutoAdapter();
         recyclerViewEstoque.setAdapter(itemAdapter);
         itemAdapter.setOnEditClickListener(this::abrirDialogProduto);
     }
@@ -222,15 +223,15 @@ public class TelaProdutos extends AppCompatActivity {
         public void onResponse(Call<Void> call, Response<Void> response) {
             if (response.isSuccessful()) {
                 listarItens();
-                Toast.makeText(TelaProdutos.this, successMessage, Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProdutoActivity.this, successMessage, Toast.LENGTH_SHORT).show();
             } else {
-                Toast.makeText(TelaProdutos.this, "Erro ao processar o produto", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProdutoActivity.this, "Erro ao processar o produto", Toast.LENGTH_SHORT).show();
             }
         }
 
         @Override
         public void onFailure(Call<Void> call, Throwable t) {
-            Toast.makeText(TelaProdutos.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+            Toast.makeText(ProdutoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -241,13 +242,13 @@ public class TelaProdutos extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     itemAdapter.setProdutos(response.body());
                 } else {
-                    Toast.makeText(TelaProdutos.this, "Erro ao carregar itens", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProdutoActivity.this, "Erro ao carregar itens", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<GetProdutoResponse>> call, Throwable t) {
-                Toast.makeText(TelaProdutos.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProdutoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }

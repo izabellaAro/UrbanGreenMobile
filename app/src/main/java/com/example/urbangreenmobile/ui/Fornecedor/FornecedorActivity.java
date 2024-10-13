@@ -1,4 +1,4 @@
-package com.example.urbangreenmobile.ui;
+package com.example.urbangreenmobile.ui.Fornecedor;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -30,11 +30,11 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TelaFornecedores extends AppCompatActivity {
+public class FornecedorActivity extends AppCompatActivity {
 
     private ApiInterface apiInterface;
     private TokenManager tokenManager;
-    private TelaFornecedorAdapter fornecedorAdapter;
+    private FornecedorAdapter fornecedorAdapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,7 +58,7 @@ public class TelaFornecedores extends AppCompatActivity {
         RecyclerView recyclerViewFornecedores = findViewById(R.id.recyclerViewFornecedores);
         recyclerViewFornecedores.setLayoutManager(new LinearLayoutManager(this));
 
-        fornecedorAdapter = new TelaFornecedorAdapter();
+        fornecedorAdapter = new FornecedorAdapter();
         recyclerViewFornecedores.setAdapter(fornecedorAdapter);
 
         fornecedorAdapter.setOnEditClickListener(this::abrirDialogFornecedor);
@@ -86,7 +86,7 @@ public class TelaFornecedores extends AppCompatActivity {
     }
 
     private void abrirDialogFornecedor(GetFornecedorResponse fornecedor) {
-        Dialog dialog = new Dialog(TelaFornecedores.this);
+        Dialog dialog = new Dialog(FornecedorActivity.this);
         dialog.setContentView(R.layout.editar_fornecedor);
 
         EditText inputEmpresa = dialog.findViewById(R.id.input_rzSocial);
@@ -175,15 +175,15 @@ public class TelaFornecedores extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     listarFornecedores();
-                    Toast.makeText(TelaFornecedores.this, "Fornecedor criado com sucesso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FornecedorActivity.this, "Fornecedor criado com sucesso", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(TelaFornecedores.this, "Erro ao criar fornecedor", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FornecedorActivity.this, "Erro ao criar fornecedor", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(TelaFornecedores.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FornecedorActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -194,15 +194,15 @@ public class TelaFornecedores extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     listarFornecedores();
-                    Toast.makeText(TelaFornecedores.this, "Fornecedor atualizado com sucesso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FornecedorActivity.this, "Fornecedor atualizado com sucesso", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(TelaFornecedores.this, "Erro ao atualizar fornecedor", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FornecedorActivity.this, "Erro ao atualizar fornecedor", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(TelaFornecedores.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FornecedorActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -214,13 +214,13 @@ public class TelaFornecedores extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     fornecedorAdapter.setFornecedores(response.body());
                 } else {
-                    Toast.makeText(TelaFornecedores.this, "Erro ao carregar fornecedores", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FornecedorActivity.this, "Erro ao carregar fornecedores", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<GetFornecedorResponse>> call, Throwable t) {
-                Toast.makeText(TelaFornecedores.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FornecedorActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -230,7 +230,7 @@ public class TelaFornecedores extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<GetInsumoResponse>> call, Response<List<GetInsumoResponse>> response) {
                 if (response.isSuccessful() && response.body() != null) {
-                    ArrayAdapter<GetInsumoResponse> adapter = new ArrayAdapter<>(TelaFornecedores.this, android.R.layout.simple_spinner_item, response.body());
+                    ArrayAdapter<GetInsumoResponse> adapter = new ArrayAdapter<>(FornecedorActivity.this, android.R.layout.simple_spinner_item, response.body());
                     adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                     spinnerInsumos.setAdapter(adapter);
                     if (selectedInsumoId != -1) {
@@ -242,13 +242,13 @@ public class TelaFornecedores extends AppCompatActivity {
                         }
                     }
                 } else {
-                    Toast.makeText(TelaFornecedores.this, "Erro ao carregar insumos", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(FornecedorActivity.this, "Erro ao carregar insumos", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<GetInsumoResponse>> call, Throwable t) {
-                Toast.makeText(TelaFornecedores.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(FornecedorActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }

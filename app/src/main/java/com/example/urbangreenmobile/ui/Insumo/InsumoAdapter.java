@@ -1,4 +1,4 @@
-package com.example.urbangreenmobile.ui;
+package com.example.urbangreenmobile.ui.Insumo;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,16 +16,16 @@ import com.example.urbangreenmobile.api.models.Insumo.GetInsumoResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelaInsumosAdapter extends RecyclerView.Adapter<TelaInsumosAdapter.InsumoViewHolder> implements Filterable {
+public class InsumoAdapter extends RecyclerView.Adapter<InsumoAdapter.InsumoViewHolder> implements Filterable {
     private List<GetInsumoResponse> itemList = new ArrayList<>();
     private List<GetInsumoResponse> insumosFull;
-    private TelaInsumosAdapter.OnEditClickListener onEditClickListener;
+    private InsumoAdapter.OnEditClickListener onEditClickListener;
 
     public interface OnEditClickListener {
         void onEditClick(GetInsumoResponse insumo);
     }
 
-    public void setOnEditClickListener(TelaInsumosAdapter.OnEditClickListener onEditClickListener) {
+    public void setOnEditClickListener(InsumoAdapter.OnEditClickListener onEditClickListener) {
         this.onEditClickListener = onEditClickListener;
     }
 
@@ -60,7 +60,7 @@ public class TelaInsumosAdapter extends RecyclerView.Adapter<TelaInsumosAdapter.
     }
 
     @Override
-    public void onBindViewHolder(TelaInsumosAdapter.InsumoViewHolder holder, int position) {
+    public void onBindViewHolder(InsumoAdapter.InsumoViewHolder holder, int position) {
         GetInsumoResponse currentItem = itemList.get(position);
 
         holder.itemName.setText(currentItem.getNome());

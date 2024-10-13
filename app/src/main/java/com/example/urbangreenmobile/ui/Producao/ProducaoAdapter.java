@@ -1,4 +1,4 @@
-package com.example.urbangreenmobile.ui;
+package com.example.urbangreenmobile.ui.Producao;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -12,7 +12,6 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.models.Fornecedor.GetFornecedorResponse;
 import com.example.urbangreenmobile.api.models.Producao.GetInspecaoResponse;
 import com.example.urbangreenmobile.api.models.Producao.ItemInspecao;
 import com.example.urbangreenmobile.api.models.Producao.TipoItem;
@@ -20,35 +19,35 @@ import com.example.urbangreenmobile.api.models.Producao.TipoItem;
 import java.util.ArrayList;
 import java.util.List;
 
-public class EditarProducaoAdapter extends RecyclerView.Adapter<EditarProducaoAdapter.ViewHolder> {
+public class ProducaoAdapter extends RecyclerView.Adapter<ProducaoAdapter.ViewHolder> {
 
     private List<TipoItem> tiposItens;
     private List<GetInspecaoResponse> inspecoes = new ArrayList<>();
-    private EditarProducaoAdapter.OnEditClickListener onEditClickListener;
+    private ProducaoAdapter.OnEditClickListener onEditClickListener;
     private List<ItemInspecao> itemInspecao = new ArrayList<>();
 
     public interface OnEditClickListener {
         void onEditClick(List<GetInspecaoResponse> inspecoes);
     }
 
-    public EditarProducaoAdapter(List<TipoItem> tiposItens) {
+    public ProducaoAdapter(List<TipoItem> tiposItens) {
         this.tiposItens = tiposItens;
     }
 
     @NonNull
     @Override
-    public EditarProducaoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+    public ProducaoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_producao_edicao,
                 parent, false);
         return new ViewHolder(view);
     }
 
-    public void setOnEditClickListener(EditarProducaoAdapter.OnEditClickListener onEditClickListener) {
+    public void setOnEditClickListener(ProducaoAdapter.OnEditClickListener onEditClickListener) {
         this.onEditClickListener = onEditClickListener;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull EditarProducaoAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ProducaoAdapter.ViewHolder holder, int position) {
         ItemInspecao inspecao = itemInspecao.get(position);
         GetInspecaoResponse response = inspecoes.get(position);
         TipoItem item = tiposItens.get(position);

@@ -1,7 +1,6 @@
-package com.example.urbangreenmobile.ui;
+package com.example.urbangreenmobile.ui.Producao;
 
 import android.app.Dialog;
-import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.CheckBox;
@@ -22,17 +21,16 @@ import com.example.urbangreenmobile.api.models.Producao.TipoItem;
 import com.example.urbangreenmobile.api.models.Producao.UpdateInspecaoRequest;
 import com.example.urbangreenmobile.utils.TokenManager;
 
-import java.util.ArrayList;
 import java.util.List;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TelaProducao extends AppCompatActivity {
+public class ProducaoActivity extends AppCompatActivity {
 
     private ApiInterface apiInterface;
     private EditText editTextDataFiltro;
-    private EditarProducaoAdapter producaoAdapter;
+    private ProducaoAdapter producaoAdapter;
     private List<TipoItem> itensInspecao;
 
     @Override
@@ -64,7 +62,7 @@ public class TelaProducao extends AppCompatActivity {
     }
 
     private void abrirDialogInspecao(View view) {
-        Dialog dialog = new Dialog(TelaProducao.this);
+        Dialog dialog = new Dialog(ProducaoActivity.this);
         dialog.setContentView(R.layout.editar_producao);
 
         listarTipoItens();
@@ -80,13 +78,13 @@ public class TelaProducao extends AppCompatActivity {
                     // Atualizar o adapter com os dados retornados
                     //editarProducaoAdapter.updateInspecoes(inspecoes);
                 } else {
-                    Toast.makeText(TelaProducao.this, "Erro ao carregar inspeções", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProducaoActivity.this, "Erro ao carregar inspeções", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<GetInspecaoResponse>> call, Throwable t) {
-                Toast.makeText(TelaProducao.this, "Erro ao se conectar à API", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProducaoActivity.this, "Erro ao se conectar à API", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -98,13 +96,13 @@ public class TelaProducao extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     producaoAdapter.setInspecoes(response.body());
                 } else {
-                    Toast.makeText(TelaProducao.this, "Erro ao carregar inspeção", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProducaoActivity.this, "Erro ao carregar inspeção", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<GetInspecaoResponse>> call, Throwable t) {
-                Toast.makeText(TelaProducao.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProducaoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -120,7 +118,7 @@ public class TelaProducao extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<TipoItem>> call, Throwable t) {
-                Toast.makeText(TelaProducao.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProducaoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -145,15 +143,15 @@ public class TelaProducao extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     //listarInspecao();
-                    Toast.makeText(TelaProducao.this, "Inspeção atualizada com sucesso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProducaoActivity.this, "Inspeção atualizada com sucesso", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(TelaProducao.this, "Erro ao atualizar inspeção", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(ProducaoActivity.this, "Erro ao atualizar inspeção", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(TelaProducao.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(ProducaoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }

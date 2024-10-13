@@ -1,8 +1,10 @@
-package com.example.urbangreenmobile.ui;
+package com.example.urbangreenmobile.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.util.Base64;
+
+import com.example.urbangreenmobile.ui.Produto.ProdutoActivity;
 
 import java.io.File;
 import java.io.FileOutputStream;
@@ -30,7 +32,7 @@ public class MultipartHelper {
         return BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
     }
 
-    public static MultipartBody.Part prepararArquivoImagem(Bitmap bitmap, TelaProdutos context) {
+    public static MultipartBody.Part prepararArquivoImagem(Bitmap bitmap, ProdutoActivity context) {
         if (bitmap == null) return null;
 
         File file = new File(context.getCacheDir(), "imagem_produto.png");

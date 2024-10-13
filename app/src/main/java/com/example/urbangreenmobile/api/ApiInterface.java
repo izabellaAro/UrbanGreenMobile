@@ -9,6 +9,7 @@ import com.example.urbangreenmobile.api.models.Insumo.UpdateInsumoRequest;
 import com.example.urbangreenmobile.api.models.Login.LoginRequest;
 import com.example.urbangreenmobile.api.models.Login.LoginResponse;
 import com.example.urbangreenmobile.api.models.Producao.GetInspecaoResponse;
+import com.example.urbangreenmobile.api.models.Producao.TipoItem;
 import com.example.urbangreenmobile.api.models.Producao.UpdateInspecaoRequest;
 import com.example.urbangreenmobile.api.models.Produto.GetProdutoResponse;
 
@@ -83,4 +84,7 @@ public interface ApiInterface {
 
     @PUT("Inspecao/{id}")
     Call<Void> atualizarInspecao(@Path("id") int id, @Body UpdateInspecaoRequest inspecao);
+
+    @GET("Inspecao/tipos-itens")
+    Call<List<TipoItem>> getTiposDeItens();
 }
