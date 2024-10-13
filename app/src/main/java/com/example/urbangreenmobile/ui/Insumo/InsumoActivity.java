@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.ApiInterface;
-import com.example.urbangreenmobile.api.ApiService;
+import com.example.urbangreenmobile.api.Integrations.ApiInterface;
+import com.example.urbangreenmobile.api.Integrations.ApiService;
 import com.example.urbangreenmobile.api.models.Insumo.CreateInsumoRequest;
 import com.example.urbangreenmobile.api.models.Insumo.GetInsumoResponse;
 import com.example.urbangreenmobile.api.models.Insumo.UpdateInsumoRequest;

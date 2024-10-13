@@ -10,11 +10,10 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.recyclerview.widget.LinearLayoutManager;
-import androidx.recyclerview.widget.RecyclerView;
+
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.ApiInterface;
-import com.example.urbangreenmobile.api.ApiService;
+import com.example.urbangreenmobile.api.Integrations.ApiInterface;
+import com.example.urbangreenmobile.api.Integrations.ApiService;
 import com.example.urbangreenmobile.api.models.Producao.GetInspecaoResponse;
 import com.example.urbangreenmobile.api.models.Producao.ItemInspecao;
 import com.example.urbangreenmobile.api.models.Producao.TipoItem;
@@ -51,11 +50,11 @@ public class ProducaoActivity extends AppCompatActivity {
             }
         });
 
-        RecyclerView recyclerViewProducao = findViewById(R.id.recyclerViewEditarProducao);
-        recyclerViewProducao.setLayoutManager(new LinearLayoutManager(this));
+       RecyclerView recyclerViewProducao = findViewById(R.id.recyclerViewEditarProducao);
+       recyclerViewProducao.setLayoutManager(new LinearLayoutManager(this));
 
-        //producaoAdapter = new EditarProducaoAdapter();
-        recyclerViewProducao.setAdapter(producaoAdapter);
+       //producaoAdapter = new EditarProducaoAdapter();
+       recyclerViewProducao.setAdapter(producaoAdapter);
 
         ImageButton editar = findViewById(R.id.edit_button);
         editar.setOnClickListener(this::abrirDialogInspecao);

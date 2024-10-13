@@ -15,8 +15,8 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.ApiInterface;
-import com.example.urbangreenmobile.api.ApiService;
+import com.example.urbangreenmobile.api.Integrations.ApiInterface;
+import com.example.urbangreenmobile.api.Integrations.ApiService;
 import com.example.urbangreenmobile.api.models.Fornecedor.CreateFornecedorRequest;
 import com.example.urbangreenmobile.api.models.Fornecedor.GetFornecedorResponse;
 import com.example.urbangreenmobile.api.models.Fornecedor.PessoaJuridica;

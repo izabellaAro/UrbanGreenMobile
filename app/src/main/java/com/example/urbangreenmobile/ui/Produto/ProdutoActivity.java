@@ -21,8 +21,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.ApiInterface;
-import com.example.urbangreenmobile.api.ApiService;
+import com.example.urbangreenmobile.api.Integrations.ApiInterface;
+import com.example.urbangreenmobile.api.Integrations.ApiService;
 import com.example.urbangreenmobile.api.models.Produto.CreateProdutoRequest;
 import com.example.urbangreenmobile.api.models.Produto.GetProdutoResponse;
 import com.example.urbangreenmobile.api.models.Produto.UpdateProdutoRequest;

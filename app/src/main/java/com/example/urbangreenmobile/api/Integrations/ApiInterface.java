@@ -1,4 +1,4 @@
-package com.example.urbangreenmobile.api;
+package com.example.urbangreenmobile.api.Integrations;
 
 import com.example.urbangreenmobile.api.models.Fornecedor.CreateFornecedorRequest;
 import com.example.urbangreenmobile.api.models.Fornecedor.GetFornecedorResponse;
@@ -79,8 +79,8 @@ public interface ApiInterface {
     @PUT("Insumo/{id}")
     Call<Void> atualizarInsumo(@Path("id") int id, @Body UpdateInsumoRequest insumo);
 
-    @GET("Inspecao?skip=0&take=50")
-    Call<List<GetInspecaoResponse>> getInspecao();
+    @GET("Inspecao/{id}")
+    Call<List<GetInspecaoResponse>> getInspecao(@Path("id") int id);
 
     @PUT("Inspecao/{id}")
     Call<Void> atualizarInspecao(@Path("id") int id, @Body UpdateInspecaoRequest inspecao);

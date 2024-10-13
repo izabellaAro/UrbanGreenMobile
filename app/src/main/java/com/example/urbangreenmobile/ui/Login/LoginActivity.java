@@ -13,8 +13,8 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.ApiService;
-import com.example.urbangreenmobile.api.ApiInterface;
+import com.example.urbangreenmobile.api.Integrations.ApiService;
+import com.example.urbangreenmobile.api.Integrations.ApiInterface;
 import com.example.urbangreenmobile.api.models.Login.LoginRequest;
 import com.example.urbangreenmobile.api.models.Login.LoginResponse;
 import com.example.urbangreenmobile.ui.Home.HomeActivity;
