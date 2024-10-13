@@ -1,4 +1,4 @@
-package com.example.urbangreenmobile.ui;
+package com.example.urbangreenmobile.ui.Produto;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -14,23 +14,22 @@ import android.widget.TextView;
 
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.bumptech.glide.Glide;
 import com.example.urbangreenmobile.R;
 import com.example.urbangreenmobile.api.models.Produto.GetProdutoResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelaProdutoAdapter extends RecyclerView.Adapter<TelaProdutoAdapter.EstoqueViewHolder> implements Filterable {
+public class ProdutoAdapter extends RecyclerView.Adapter<ProdutoAdapter.EstoqueViewHolder> implements Filterable {
     private List<GetProdutoResponse> itemList = new ArrayList<>();
     private List<GetProdutoResponse> produtosFull;
-    private TelaProdutoAdapter.OnEditClickListener onEditClickListener;
+    private ProdutoAdapter.OnEditClickListener onEditClickListener;
 
     public interface OnEditClickListener {
         void onEditClick(GetProdutoResponse produto);
     }
 
-    public void setOnEditClickListener(TelaProdutoAdapter.OnEditClickListener onEditClickListener) {
+    public void setOnEditClickListener(ProdutoAdapter.OnEditClickListener onEditClickListener) {
         this.onEditClickListener = onEditClickListener;
     }
 

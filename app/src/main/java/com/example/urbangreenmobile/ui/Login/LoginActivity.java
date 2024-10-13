@@ -1,4 +1,4 @@
-package com.example.urbangreenmobile.ui;
+package com.example.urbangreenmobile.ui.Login;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -13,17 +13,18 @@ import androidx.core.view.ViewCompat;
 import androidx.core.view.WindowInsetsCompat;
 
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.ApiService;
-import com.example.urbangreenmobile.api.ApiInterface;
+import com.example.urbangreenmobile.api.Integrations.ApiService;
+import com.example.urbangreenmobile.api.Integrations.ApiInterface;
 import com.example.urbangreenmobile.api.models.Login.LoginRequest;
 import com.example.urbangreenmobile.api.models.Login.LoginResponse;
+import com.example.urbangreenmobile.ui.Home.HomeActivity;
 import com.example.urbangreenmobile.utils.TokenManager;
 
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class Login extends AppCompatActivity {
+public class LoginActivity extends AppCompatActivity {
 
     private TokenManager tokenManager;
 
@@ -68,19 +69,19 @@ public class Login extends AppCompatActivity {
 
                     telaprincipal();
                 } else {
-                    Toast.makeText(Login.this, "Falha no login: " + response.message(), Toast.LENGTH_SHORT).show();
+                    Toast.makeText(LoginActivity.this, "Falha no login: " + response.message(), Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<LoginResponse> call, Throwable t) {
-                Toast.makeText(Login.this, "Erro de comunicação: " + t.getMessage(), Toast.LENGTH_SHORT).show();
+                Toast.makeText(LoginActivity.this, "Erro de comunicação: " + t.getMessage(), Toast.LENGTH_SHORT).show();
             }
         });
     }
 
     private void telaprincipal() {
-        Intent in = new Intent(Login.this, TelaPrincipal.class);
+        Intent in = new Intent(LoginActivity.this, HomeActivity.class);
         startActivity(in);
         finish();
     }

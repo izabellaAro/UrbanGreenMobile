@@ -1,4 +1,4 @@
-package com.example.urbangreenmobile.ui;
+package com.example.urbangreenmobile.ui.Insumo;
 
 import android.app.Dialog;
 import android.os.Bundle;
@@ -13,8 +13,8 @@ import androidx.recyclerview.widget.GridLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.ApiInterface;
-import com.example.urbangreenmobile.api.ApiService;
+import com.example.urbangreenmobile.api.Integrations.ApiInterface;
+import com.example.urbangreenmobile.api.Integrations.ApiService;
 import com.example.urbangreenmobile.api.models.Insumo.CreateInsumoRequest;
 import com.example.urbangreenmobile.api.models.Insumo.GetInsumoResponse;
 import com.example.urbangreenmobile.api.models.Insumo.UpdateInsumoRequest;
@@ -26,10 +26,10 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class TelaInsumos extends AppCompatActivity {
+public class InsumoActivity extends AppCompatActivity {
 
     private RecyclerView recyclerViewInsumo;
-    private TelaInsumosAdapter insumosAdapter;
+    private InsumoAdapter insumosAdapter;
     private ApiInterface apiInterface;
 
     @Override
@@ -40,7 +40,7 @@ public class TelaInsumos extends AppCompatActivity {
         recyclerViewInsumo = findViewById(R.id.recyclerViewInsumo);
         recyclerViewInsumo.setLayoutManager(new GridLayoutManager(this, 2));
 
-        insumosAdapter = new TelaInsumosAdapter();
+        insumosAdapter = new InsumoAdapter();
         recyclerViewInsumo.setAdapter(insumosAdapter);
 
         insumosAdapter.setOnEditClickListener(this::abrirDialogInsumo);
@@ -73,7 +73,7 @@ public class TelaInsumos extends AppCompatActivity {
     }
 
     private void abrirDialogInsumo(GetInsumoResponse insumo) {
-        Dialog dialog = new Dialog(TelaInsumos.this);
+        Dialog dialog = new Dialog(InsumoActivity.this);
         dialog.setContentView(R.layout.editar_insumo);
 
         EditText inputInsumo = dialog.findViewById(R.id.input_insumo);
@@ -123,15 +123,15 @@ public class TelaInsumos extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     listarItens();
-                    Toast.makeText(TelaInsumos.this, "Insumo criado com sucesso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InsumoActivity.this, "Insumo criado com sucesso", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(TelaInsumos.this, "Insumo ao criar produto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InsumoActivity.this, "Insumo ao criar produto", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(TelaInsumos.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(InsumoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -151,15 +151,15 @@ public class TelaInsumos extends AppCompatActivity {
             public void onResponse(Call<Void> call, Response<Void> response) {
                 if (response.isSuccessful()) {
                     listarItens();
-                    Toast.makeText(TelaInsumos.this, "Insumo atualizado com sucesso", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InsumoActivity.this, "Insumo atualizado com sucesso", Toast.LENGTH_SHORT).show();
                 } else {
-                    Toast.makeText(TelaInsumos.this, "Insumo ao atualizar produto", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InsumoActivity.this, "Insumo ao atualizar produto", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(TelaInsumos.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(InsumoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -172,13 +172,13 @@ public class TelaInsumos extends AppCompatActivity {
                 if (response.isSuccessful() && response.body() != null) {
                     insumosAdapter.setProdutos(response.body());
                 } else {
-                    Toast.makeText(TelaInsumos.this, "Erro ao carregar itens", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(InsumoActivity.this, "Erro ao carregar itens", Toast.LENGTH_SHORT).show();
                 }
             }
 
             @Override
             public void onFailure(Call<List<GetInsumoResponse>> call, Throwable t) {
-                Toast.makeText(TelaInsumos.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+                Toast.makeText(InsumoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
             }
         });
     }

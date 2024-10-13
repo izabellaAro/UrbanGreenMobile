@@ -1,4 +1,4 @@
-package com.example.urbangreenmobile.ui;
+package com.example.urbangreenmobile.ui.Fornecedor;
 
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +16,7 @@ import com.example.urbangreenmobile.api.models.Fornecedor.GetFornecedorResponse;
 import java.util.ArrayList;
 import java.util.List;
 
-public class TelaFornecedorAdapter extends RecyclerView.Adapter<TelaFornecedorAdapter.FornecedorViewHolder> implements Filterable {
+public class FornecedorAdapter extends RecyclerView.Adapter<FornecedorAdapter.FornecedorViewHolder> implements Filterable {
 
     private List<GetFornecedorResponse> fornecedores = new ArrayList<>();
     private List<GetFornecedorResponse> fornecedoresFull;

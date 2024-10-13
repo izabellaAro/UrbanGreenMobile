@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <include
+        android:id="@+id/toolbar"
+        layout="@layout/toolbar_image" />
+
+    <LinearLayout
+        android:id="@+id/header_layout"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginTop="75dp"
+        android:orientation="horizontal">
+
+        <ImageView
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="-15dp"
+            android:src="@drawable/logo" />
+
+        <TextView
+            android:id="@+id/text_producao"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="-10dp"
+            android:text="Produção"
+            android:textColor="@color/black"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+        <EditText
+            android:id="@+id/search_input"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="50dp"
+            android:elevation="2sp"
+            android:background="@null"
+            android:enabled="true"
+            android:focusable="true"
+            android:hint="Pesquisar..."
+            android:inputType="text" />
+
+        <TextView
+            android:id="@+id/search_bar"
+            android:layout_width="185dp"
+            android:layout_height="20dp"
+            android:layout_marginStart="-100dp"
+            android:layout_marginTop="5dp"
+            android:background="@drawable/background_barradepesquisa"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
+            android:padding="5dp" />
+
+    </LinearLayout>
+
+    <EditText
+        android:id="@+id/editTextDataFiltro"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:hint="Filtrar por data (AAAA-MM-DD)"
+        android:focusable="false"
+        android:clickable="true"
+        android:layout_marginTop="100dp"
+        android:layout_marginStart="80dp"/>
+
+    <include
+        android:id="@+id/itens"
+        layout="@layout/item_producao"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:layout_marginStart="20dp"/>
+
+</RelativeLayout>
