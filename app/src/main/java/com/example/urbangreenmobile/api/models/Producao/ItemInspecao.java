@@ -1,10 +1,23 @@
 package com.example.urbangreenmobile.api.models.Producao;
 
 public class ItemInspecao {
-    private String data;  // Formato de data ISO 8601
+    private String data;
     private String nome;  // Nome do tipo no GET
     private int tipoId;   // ID do tipo no POST/PUT
     private boolean realizado;
+
+    public ItemInspecao(String nome, int tipoId, String data, boolean realizado){
+        this.nome = nome;
+        this.tipoId = tipoId;
+        this.data = data;
+        this.realizado = realizado;
+    }
+
+    public ItemInspecao(String nome, int tipoId){
+        this.nome = nome;
+        this.tipoId = tipoId;
+        this.data = "";
+    }
 
     // Getters and Setters
     public String getData() {
