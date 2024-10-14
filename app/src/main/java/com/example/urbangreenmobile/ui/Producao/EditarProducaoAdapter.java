@@ -31,7 +31,7 @@ public class EditarProducaoAdapter extends RecyclerView.Adapter<EditarProducaoAd
         holder.nomeItem.setText(item.getNome());
         holder.itemInspecaoCheckbox.setChecked(item.isRealizado());
         holder.data.setText(String.format("%s%s", holder.data.getText(), item.getData()));
-        holder.registro.setText(inspecao.getRegistro());
+//        holder.registro.setText(inspecao.getRegistro());
 
         holder.itemInspecaoCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override

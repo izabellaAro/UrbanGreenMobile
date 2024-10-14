@@ -59,7 +59,7 @@ public class EditarProducaoActivity extends AppCompatActivity {
     }
 
     private void listarTipoItens(){
-        editarProducaoAdapter.setInspecao(producaoService.getItensInspecao());
+        editarProducaoAdapter.setInspecao(producaoService.getItensInspecao(1));
     }
 
     private void salvarInspecao (Dialog dialog, GetInspecaoResponse inspecao, TextView

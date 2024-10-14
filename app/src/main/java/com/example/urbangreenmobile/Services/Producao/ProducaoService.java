@@ -77,9 +77,9 @@ public class ProducaoService implements IProducaoService {
     }
 
     @Override
-    public GetInspecaoResponse getItensInspecao() {
+    public GetInspecaoResponse getItensInspecao(int id) {
         CompletableFuture<List<TipoItem>> listarTipoItensFuture = listarTipoItensFuture();
-        CompletableFuture<GetInspecaoResponse> obterInspecaoFuture = obterInspecaoFuture(1);
+        CompletableFuture<GetInspecaoResponse> obterInspecaoFuture = obterInspecaoFuture(id);
 
         CompletableFuture<List<ItemInspecao>> combinedFuture = listarTipoItensFuture
                 .thenCombine(obterInspecaoFuture, this::mergeItens);
