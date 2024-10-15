@@ -12,7 +12,8 @@
         <CheckBox
             android:id="@+id/check_isRealizado"
             android:layout_width="30dp"
-            android:layout_height="30dp"/>
+            android:layout_height="30dp"
+            android:buttonTint="@color/greenn"/>
 
         <TextView
             android:id="@+id/textViewTipoInspecao"

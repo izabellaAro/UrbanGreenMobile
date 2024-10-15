@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="500dp"
+    android:layout_height="wrap_content"
     android:padding="30dp"
     android:background="@drawable/background_cardedit">
 
@@ -45,8 +45,7 @@
             android:layout_height="wrap_content"
             android:hint="Registros"
             android:background="@drawable/background_inputtext"
-            android:padding="8dp"
-            android:layout_marginTop="20dp"/>
+            android:padding="8dp"/>
 
     </LinearLayout>
 

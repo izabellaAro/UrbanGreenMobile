@@ -40,22 +40,20 @@ public class ProducaoAdapter extends RecyclerView.Adapter<ProducaoAdapter.Estoqu
 
     class EstoqueViewHolder extends RecyclerView.ViewHolder {
         public ImageView itemImage;
-        public TextView itemName, itemQuantity, itemPrice;
+        public TextView itemName;
         public ImageButton itemEditButton;
 
         public EstoqueViewHolder(View itemView) {
             super(itemView);
             itemImage = itemView.findViewById(R.id.item_image);
             itemName = itemView.findViewById(R.id.item_nome);
-            itemQuantity = itemView.findViewById(R.id.item_quantidade);
-            itemPrice = itemView.findViewById(R.id.item_preco);
-            itemEditButton = itemView.findViewById(R.id.item_edit_button);
+            itemEditButton = itemView.findViewById(R.id.edit_button);
         }
     }
 
     @Override
     public EstoqueViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_produto, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_producao, parent, false);
         return new EstoqueViewHolder(view);
     }
 
@@ -64,8 +62,6 @@ public class ProducaoAdapter extends RecyclerView.Adapter<ProducaoAdapter.Estoqu
         GetProdutoResponse currentItem = produtos.get(position);
 
         holder.itemName.setText(currentItem.getNome());
-        holder.itemQuantity.setText("Qtd: " + currentItem.getQuantidade());
-        holder.itemPrice.setText("Preço: " + currentItem.getValor());
 
         byte[] imageBytes = Base64.decode(currentItem.getImagemBase64(), Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
