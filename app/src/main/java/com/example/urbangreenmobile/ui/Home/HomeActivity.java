@@ -19,6 +19,7 @@ import com.example.urbangreenmobile.ui.Insumo.InsumoActivity;
 import com.example.urbangreenmobile.ui.Login.LoginActivity;
 import com.example.urbangreenmobile.ui.Producao.ProducaoActivity;
 import com.example.urbangreenmobile.ui.Produto.ProdutoActivity;
+import com.example.urbangreenmobile.ui.Venda.VendaActivity;
 import com.google.android.material.navigation.NavigationView;
 
 public class HomeActivity extends AppCompatActivity {
@@ -63,6 +64,13 @@ public class HomeActivity extends AppCompatActivity {
 
                 if(id == R.id.nav_producao){
                     Intent intent = new Intent(HomeActivity.this, ProducaoActivity.class);
+                    startActivity(intent);
+                    drawerLayout.closeDrawers();
+                    return true;
+                }
+
+                if(id == R.id.nav_venda){
+                    Intent intent = new Intent(HomeActivity.this, VendaActivity.class);
                     startActivity(intent);
                     drawerLayout.closeDrawers();
                     return true;

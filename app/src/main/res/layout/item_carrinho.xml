@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="horizontal">
+
+    <TextView
+        android:id="@+id/nome_item"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:text="item"
+        android:textSize="16dp"
+        android:fontFamily="@font/archivo"
+        android:padding="10dp" />
+
+    <TextView
+        android:id="@+id/quantidade"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:text="qnt"
+        android:textSize="16dp"
+        android:fontFamily="@font/archivo"
+        android:padding="10dp"
+        android:layout_marginStart="-220dp"/>
+</LinearLayout>

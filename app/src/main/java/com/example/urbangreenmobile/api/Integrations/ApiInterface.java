@@ -8,6 +8,8 @@ import com.example.urbangreenmobile.api.models.Insumo.GetInsumoResponse;
 import com.example.urbangreenmobile.api.models.Insumo.UpdateInsumoRequest;
 import com.example.urbangreenmobile.api.models.Login.LoginRequest;
 import com.example.urbangreenmobile.api.models.Login.LoginResponse;
+import com.example.urbangreenmobile.api.models.Pedido.CreatePedidoRequest;
+import com.example.urbangreenmobile.api.models.Pedido.ItemPedido;
 import com.example.urbangreenmobile.api.models.Producao.GetInspecaoResponse;
 import com.example.urbangreenmobile.api.models.Producao.TipoItem;
 import com.example.urbangreenmobile.api.models.Producao.UpdateInspecaoRequest;
@@ -87,4 +89,10 @@ public interface ApiInterface {
 
     @GET("Inspecao/tipos-itens")
     Call<List<TipoItem>> getTiposDeItens();
+
+    @POST("ItemPedido")
+    Call<Void> criarItemPedido(@Body ItemPedido itemPedido);
+
+    @POST("Pedido")
+    Call<Void> criarPedido(@Body CreatePedidoRequest pedido);
 }
