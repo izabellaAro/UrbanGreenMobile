@@ -59,12 +59,23 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.EstoqueViewH
     public void onBindViewHolder(EstoqueViewHolder holder, int position) {
         GetProdutoResponse currentItem = produtos.get(position);
         //ItemPedido item = itens.get(position);
+        final int[] count = {0};
 
         holder.itemName.setText(currentItem.getNome());
 
         byte[] imageBytes = Base64.decode(currentItem.getImagemBase64(), Base64.DEFAULT);
         Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
         holder.itemImage.setImageBitmap(bitmap);
+
+        holder.btnAdicionar.setOnClickListener(v -> {
+            count[0]++;
+            holder.quantidade.setText(String.valueOf(count[0]));
+        });
+
+        holder.btnDiminuir.setOnClickListener(v -> {
+            count[0]--;
+            holder.quantidade.setText(String.valueOf(count[0]));
+        });
     }
 
     public void setOnEditClickListener(VendaAdapter.OnEditClickListener onEditClickListener) {
