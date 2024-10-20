@@ -80,8 +80,8 @@ public interface ApiInterface {
     @PUT("Insumo/{id}")
     Call<Void> atualizarInsumo(@Path("id") int id, @Body UpdateInsumoRequest insumo);
 
-    @GET("Inspecao/{id}")
-    Call<GetInspecaoResponse> getInspecao(@Path("id") int id);
+    @GET("Inspecao/produto/{id}")
+    Call<GetInspecaoResponse> getInspecaoPorProdutoId(@Path("id") int id);
 
     @POST("Inspecao")
     Call<Void> criarInspecao(@Body CreateInspecaoRequest inspecao);

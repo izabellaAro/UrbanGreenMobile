@@ -35,7 +35,7 @@ public class ProducaoService implements IProducaoService {
     private CompletableFuture<GetInspecaoResponse> obterInspecaoFuture(int id) {
         return CompletableFuture.supplyAsync(() -> {
             try {
-                Response<GetInspecaoResponse> response = apiInterface.getInspecao(id).execute();
+                Response<GetInspecaoResponse> response = apiInterface.getInspecaoPorProdutoId(id).execute();
                 return response.body();
             } catch (Exception e) {
                 e.printStackTrace();
