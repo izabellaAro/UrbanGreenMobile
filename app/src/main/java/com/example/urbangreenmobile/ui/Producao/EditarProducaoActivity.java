@@ -1,5 +1,6 @@
 package com.example.urbangreenmobile.ui.Producao;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.ImageButton;
@@ -34,16 +35,26 @@ public class EditarProducaoActivity extends AppCompatActivity {
     private IProducaoService producaoService;
     private GetInspecaoResponse inspecaoResponse;
     private TextView registroInput;
+    private ImageButton fecharBotao;
+    private int produtoId;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.editar_producao);
 
+        Intent intent = getIntent();
+        produtoId = intent.getIntExtra("itemId", 1);
+
         setupApiInterface();
 
         producaoService = new ProducaoService(this.apiInterface);
         registroInput = findViewById(R.id.input_registro);
+
+        fecharBotao = findViewById(R.id.close_button);
+        fecharBotao.setOnClickListener(v -> {
+            finish();
+        });
 
         setupRecyclerView();
         obterInspecao();
@@ -62,7 +73,7 @@ public class EditarProducaoActivity extends AppCompatActivity {
     }
 
     private void obterInspecao(){
-        inspecaoResponse = producaoService.getItensInspecao(1);
+        inspecaoResponse = producaoService.getItensInspecao(produtoId);
 
         itemEditarProducaoAdapter.setInspecao(inspecaoResponse);
         registroInput.setText(inspecaoResponse.getRegistro());

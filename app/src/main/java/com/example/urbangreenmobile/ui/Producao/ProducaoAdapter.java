@@ -6,49 +6,24 @@ import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.models.Producao.GetInspecaoResponse;
-import com.example.urbangreenmobile.api.models.Producao.ItemInspecao;
-import com.example.urbangreenmobile.api.models.Producao.TipoItem;
 import com.example.urbangreenmobile.api.models.Produto.GetProdutoResponse;
-import com.example.urbangreenmobile.ui.Produto.ProdutoAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
 
 public class ProducaoAdapter extends RecyclerView.Adapter<ProducaoAdapter.EstoqueViewHolder> {
     private List<GetProdutoResponse> produtos = new ArrayList<>();
-    private List<GetInspecaoResponse> inspecoes = new ArrayList<>();
-    private List<ItemInspecao> itemInspecao = new ArrayList<>();
-    private ProducaoAdapter.OnEditClickListener onEditClickListener;
+    private OnItemButtonClickListener onEditClickListener;
 
-    public interface OnEditClickListener {
-        void onEditClick(List<GetInspecaoResponse> inspecoes);
-    }
-
-    public ProducaoAdapter() { }
-
-    class EstoqueViewHolder extends RecyclerView.ViewHolder {
-        public ImageView itemImage;
-        public TextView itemName;
-        public ImageButton itemEditButton;
-
-        public EstoqueViewHolder(View itemView) {
-            super(itemView);
-            itemImage = itemView.findViewById(R.id.item_image);
-            itemName = itemView.findViewById(R.id.item_nome);
-            itemEditButton = itemView.findViewById(R.id.edit_button);
-        }
+    public ProducaoAdapter(OnItemButtonClickListener listener){
+        onEditClickListener = listener;
     }
 
     @Override
@@ -67,15 +42,11 @@ public class ProducaoAdapter extends RecyclerView.Adapter<ProducaoAdapter.Estoqu
         Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
         holder.itemImage.setImageBitmap(bitmap);
 
-//         holder.itemEditButton.setOnClickListener(v -> {
-//             if (onEditClickListener != null) {
-// //                onEditClickListener.onEditClick(currentItem);
-//             }
-//         });
-    }
-
-    public void setOnEditClickListener(ProducaoAdapter.OnEditClickListener onEditClickListener) {
-        this.onEditClickListener = onEditClickListener;
+         holder.itemEditButton.setOnClickListener(v -> {
+             if (onEditClickListener != null) {
+                 onEditClickListener.onItemButtonClick(currentItem.getId());
+             }
+         });
     }
 
     public void setProdutos(List<GetProdutoResponse> produtos) {
@@ -86,5 +57,18 @@ public class ProducaoAdapter extends RecyclerView.Adapter<ProducaoAdapter.Estoqu
     @Override
     public int getItemCount() {
         return produtos.size();
+    }
+
+    class EstoqueViewHolder extends RecyclerView.ViewHolder {
+        public ImageView itemImage;
+        public TextView itemName;
+        public ImageButton itemEditButton;
+
+        public EstoqueViewHolder(View itemView) {
+            super(itemView);
+            itemImage = itemView.findViewById(R.id.item_image);
+            itemName = itemView.findViewById(R.id.item_nome);
+            itemEditButton = itemView.findViewById(R.id.edit_button);
+        }
     }
 }
