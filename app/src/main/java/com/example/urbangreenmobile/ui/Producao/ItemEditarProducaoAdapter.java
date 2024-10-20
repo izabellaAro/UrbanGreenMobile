@@ -5,7 +5,6 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.CompoundButton;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -15,7 +14,7 @@ import com.example.urbangreenmobile.R;
 import com.example.urbangreenmobile.api.models.Producao.GetInspecaoResponse;
 import com.example.urbangreenmobile.api.models.Producao.ItemInspecao;
 
-public class EditarProducaoAdapter extends RecyclerView.Adapter<EditarProducaoAdapter.ViewHolder>{
+public class ItemEditarProducaoAdapter extends RecyclerView.Adapter<ItemEditarProducaoAdapter.ViewHolder>{
     private GetInspecaoResponse inspecao;
 
     @NonNull
@@ -31,11 +30,11 @@ public class EditarProducaoAdapter extends RecyclerView.Adapter<EditarProducaoAd
         holder.nomeItem.setText(item.getNome());
         holder.itemInspecaoCheckbox.setChecked(item.isRealizado());
         holder.data.setText(String.format("%s%s", holder.data.getText(), item.getData()));
-//        holder.registro.setText(inspecao.getRegistro());
 
         holder.itemInspecaoCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
             @Override
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
+                item.setRealizado(isChecked);
                 buttonView.setChecked(isChecked);
             }
         });
@@ -54,14 +53,12 @@ public class EditarProducaoAdapter extends RecyclerView.Adapter<EditarProducaoAd
     public class ViewHolder extends RecyclerView.ViewHolder {
         public CheckBox itemInspecaoCheckbox;
         public TextView nomeItem, data;
-        public EditText registro;
 
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             itemInspecaoCheckbox = itemView.findViewById(R.id.check_isRealizado);
             nomeItem = itemView.findViewById(R.id.textViewTipoInspecao);
             data = itemView.findViewById(R.id.textViewDataInspecao);
-            registro = itemView.findViewById(R.id.input_registro);
         }
     }
 }
