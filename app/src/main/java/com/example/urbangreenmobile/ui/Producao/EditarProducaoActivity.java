@@ -16,9 +16,10 @@ import com.example.urbangreenmobile.Services.Producao.IProducaoService;
 import com.example.urbangreenmobile.Services.Producao.ProducaoService;
 import com.example.urbangreenmobile.api.Integrations.ApiInterface;
 import com.example.urbangreenmobile.api.Integrations.ApiService;
+import com.example.urbangreenmobile.api.models.Producao.CreateInspecaoRequest;
 import com.example.urbangreenmobile.api.models.Producao.GetInspecaoResponse;
 import com.example.urbangreenmobile.api.models.Producao.UpdateInspecaoRequest;
-import com.example.urbangreenmobile.api.models.Producao.UpdateItemRequest;
+import com.example.urbangreenmobile.api.models.Producao.UpdateItemInspecaoRequest;
 import com.example.urbangreenmobile.utils.TokenManager;
 
 import java.util.List;
@@ -73,7 +74,7 @@ public class EditarProducaoActivity extends AppCompatActivity {
     }
 
     private void obterInspecao(){
-        inspecaoResponse = producaoService.getItensInspecao(produtoId);
+        inspecaoResponse = producaoService.getInspecaoComItens(produtoId);
 
         itemEditarProducaoAdapter.setInspecao(inspecaoResponse);
         registroInput.setText(inspecaoResponse.getRegistro());
@@ -84,8 +85,8 @@ public class EditarProducaoActivity extends AppCompatActivity {
         request.setProdutoId(inspecaoResponse.getProdutoId());
         request.setRegistro(registroInput.getText().toString());
 
-        List<UpdateItemRequest> itens = inspecaoResponse.getItens().stream()
-                .map(item -> new UpdateItemRequest(item.getTipoId(), item.isRealizado()))
+        List<UpdateItemInspecaoRequest> itens = inspecaoResponse.getItens().stream()
+                .map(item -> new UpdateItemInspecaoRequest(item.getTipoId(), item.isRealizado()))
                 .collect(Collectors.toList());
 
         request.setItens(itens);
@@ -108,6 +109,35 @@ public class EditarProducaoActivity extends AppCompatActivity {
         });
     }
 
+    private void criarInspecao(){
+        CreateInspecaoRequest request = new CreateInspecaoRequest();
+        request.setProdutoId(inspecaoResponse.getProdutoId());
+        request.setRegistro(registroInput.getText().toString());
+
+        List<UpdateItemInspecaoRequest> itens = inspecaoResponse.getItens().stream()
+                .map(item -> new UpdateItemInspecaoRequest(item.getTipoId(), item.isRealizado()))
+                .collect(Collectors.toList());
+
+        request.setItens(itens);
+
+        apiInterface.criarInspecao(request).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(EditarProducaoActivity.this, "Inspeção criada com sucesso", Toast.LENGTH_SHORT).show();
+                    obterInspecao();
+                } else {
+                    Toast.makeText(EditarProducaoActivity.this, "Erro ao criar inspeção", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(EditarProducaoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+            }
+        });
+    }
+
     private void configurarListenerBotaoSalvar(){
         ImageButton buttonSalvar = findViewById(R.id.btn_salvar);
 
@@ -118,8 +148,7 @@ public class EditarProducaoActivity extends AppCompatActivity {
                     atualizarInspecao();
                 }
                 else {
-                    // TODO: Adicionar caso em que nao existe uma inspecao
-                    Toast.makeText(getApplicationContext(), "Botão clicado!", Toast.LENGTH_SHORT).show();
+                    criarInspecao();
                 }
             }
         });

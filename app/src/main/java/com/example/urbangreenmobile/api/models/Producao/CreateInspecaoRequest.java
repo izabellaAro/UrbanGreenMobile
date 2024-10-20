@@ -5,7 +5,7 @@ import java.util.List;
 public class CreateInspecaoRequest {
     private int produtoId;
     private String registro;
-    private List<ItemInspecao> itens;
+    private List<UpdateItemInspecaoRequest> itens;
 
     // Getters and Setters
     public int getProdutoId() {
@@ -24,11 +24,11 @@ public class CreateInspecaoRequest {
         this.registro = registro;
     }
 
-    public List<ItemInspecao> getItens() {
+    public List<UpdateItemInspecaoRequest> getItens() {
         return itens;
     }
 
-    public void setItens(List<ItemInspecao> itens) {
+    public void setItens(List<UpdateItemInspecaoRequest> itens) {
         this.itens = itens;
     }
 }

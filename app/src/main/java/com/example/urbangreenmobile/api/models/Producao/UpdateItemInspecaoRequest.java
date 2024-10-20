@@ -1,14 +1,13 @@
 package com.example.urbangreenmobile.api.models.Producao;
 
 import java.time.LocalTime;
-import java.util.Date;
 
-public class UpdateItemRequest {
+public class UpdateItemInspecaoRequest {
     private int tipoId;
     private boolean realizado;
     private LocalTime data;
 
-    public UpdateItemRequest(int tipoId, boolean realizado){
+    public UpdateItemInspecaoRequest(int tipoId, boolean realizado){
         this.tipoId = tipoId;
         this.realizado = realizado;
     }

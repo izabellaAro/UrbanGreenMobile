@@ -77,15 +77,21 @@ public class ProducaoService implements IProducaoService {
     }
 
     @Override
-    public GetInspecaoResponse getItensInspecao(int id) {
+    public GetInspecaoResponse getInspecaoComItens(int produtoId) {
         CompletableFuture<List<TipoItem>> listarTipoItensFuture = listarTipoItensFuture();
-        CompletableFuture<GetInspecaoResponse> obterInspecaoFuture = obterInspecaoFuture(id);
+        CompletableFuture<GetInspecaoResponse> obterInspecaoFuture = obterInspecaoFuture(produtoId);
 
         CompletableFuture<List<ItemInspecao>> combinedFuture = listarTipoItensFuture
                 .thenCombine(obterInspecaoFuture, this::mergeItens);
 
         try {
             GetInspecaoResponse inspecao = obterInspecaoFuture.get();
+
+            if (inspecao == null){
+                inspecao = new GetInspecaoResponse();
+                inspecao.setProdutoId(produtoId);
+            }
+
             List<ItemInspecao> itens = combinedFuture.get();
             inspecao.setItens(itens);
 
