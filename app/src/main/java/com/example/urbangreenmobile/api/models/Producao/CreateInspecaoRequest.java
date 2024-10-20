@@ -6,6 +6,7 @@ public class CreateInspecaoRequest {
     private int produtoId;
     private String registro;
     private List<UpdateItemInspecaoRequest> itens;
+     private int qntColhida = 1;
 
     // Getters and Setters
     public int getProdutoId() {
