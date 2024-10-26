@@ -1,97 +1,74 @@
 package com.example.urbangreenmobile.ui.Producao;
 
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.util.Base64;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.CheckBox;
-import android.widget.CompoundButton;
-import android.widget.EditText;
+import android.widget.ImageButton;
+import android.widget.ImageView;
 import android.widget.TextView;
 
-import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbangreenmobile.R;
-import com.example.urbangreenmobile.api.models.Producao.GetInspecaoResponse;
-import com.example.urbangreenmobile.api.models.Producao.ItemInspecao;
-import com.example.urbangreenmobile.api.models.Producao.TipoItem;
+import com.example.urbangreenmobile.api.models.Produto.GetProdutoResponse;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ProducaoAdapter extends RecyclerView.Adapter<ProducaoAdapter.ViewHolder> {
+public class ProducaoAdapter extends RecyclerView.Adapter<ProducaoAdapter.EstoqueViewHolder> {
+    private List<GetProdutoResponse> produtos = new ArrayList<>();
+    private OnItemButtonClickListener onEditClickListener;
 
-    private List<TipoItem> tiposItens;
-    private List<GetInspecaoResponse> inspecoes = new ArrayList<>();
-    private ProducaoAdapter.OnEditClickListener onEditClickListener;
-    private List<ItemInspecao> itemInspecao = new ArrayList<>();
-
-    public interface OnEditClickListener {
-        void onEditClick(List<GetInspecaoResponse> inspecoes);
-    }
-
-    public ProducaoAdapter(List<TipoItem> tiposItens) {
-        this.tiposItens = tiposItens;
-    }
-
-    @NonNull
-    @Override
-    public ProducaoAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_producao_edicao,
-                parent, false);
-        return new ViewHolder(view);
-    }
-
-    public void setOnEditClickListener(ProducaoAdapter.OnEditClickListener onEditClickListener) {
-        this.onEditClickListener = onEditClickListener;
+    public ProducaoAdapter(OnItemButtonClickListener listener){
+        onEditClickListener = listener;
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ProducaoAdapter.ViewHolder holder, int position) {
-        ItemInspecao inspecao = itemInspecao.get(position);
-        GetInspecaoResponse response = inspecoes.get(position);
-        TipoItem item = tiposItens.get(position);
-        holder.nomeItem.setText(item.getNome());
-        //holder.nomeItem.setText(inspecao.getNome());
-        //holder.itemInspecaoCheckbox.setChecked(false);
-        //holder.data.setText(inspecao.getData());
-        //holder.registro.setText(response.getRegistro());
+    public EstoqueViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_producao, parent, false);
+        return new EstoqueViewHolder(view);
+    }
 
-        holder.itemInspecaoCheckbox.setOnCheckedChangeListener(new CompoundButton.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
-//                tipoItem.(isChecked);
-            }
-        });
+    @Override
+    public void onBindViewHolder(EstoqueViewHolder holder, int position) {
+        GetProdutoResponse currentItem = produtos.get(position);
+
+        holder.itemName.setText(currentItem.getNome());
+
+        byte[] imageBytes = Base64.decode(currentItem.getImagemBase64(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        holder.itemImage.setImageBitmap(bitmap);
+
+         holder.itemEditButton.setOnClickListener(v -> {
+             if (onEditClickListener != null) {
+                 onEditClickListener.onItemButtonClick(currentItem.getId());
+             }
+         });
+    }
+
+    public void setProdutos(List<GetProdutoResponse> produtos) {
+        this.produtos = produtos;
+        notifyDataSetChanged();
     }
 
     @Override
     public int getItemCount() {
-        return inspecoes.size();
+        return produtos.size();
     }
 
-    public void setInspecoes(List<GetInspecaoResponse> inspecaoResponse) {
-        this.inspecoes = inspecaoResponse;
-        notifyDataSetChanged();
-    }
+    class EstoqueViewHolder extends RecyclerView.ViewHolder {
+        public ImageView itemImage;
+        public TextView itemName;
+        public ImageButton itemEditButton;
 
-    public void setTiposItens(List<TipoItem> listItens){
-        this.tiposItens = listItens;
-        notifyDataSetChanged();
-    }
-
-    public class ViewHolder extends RecyclerView.ViewHolder {
-        public CheckBox itemInspecaoCheckbox;
-        public TextView nomeItem, data;
-        public EditText registro;
-
-
-        public ViewHolder(@NonNull View itemView) {
+        public EstoqueViewHolder(View itemView) {
             super(itemView);
-            itemInspecaoCheckbox = itemView.findViewById(R.id.check_isRealizado);
-            nomeItem = itemView.findViewById(R.id.textViewTipoInspecao);
-            data = itemView.findViewById(R.id.textViewDataInspecao);
-            registro = itemView.findViewById(R.id.input_registro);
+            itemImage = itemView.findViewById(R.id.item_image);
+            itemName = itemView.findViewById(R.id.item_nome);
+            itemEditButton = itemView.findViewById(R.id.edit_button);
         }
     }
 }

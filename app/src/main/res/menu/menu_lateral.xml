@@ -21,8 +21,4 @@
         android:icon="@drawable/iconevendas"
         android:title="@string/title_venda"/>
 
-    <item
-        android:id="@+id/nav_pedidos"
-        android:icon="@drawable/iconepedidos"
-        android:title="@string/title_pedidos"/>
 </menu>
