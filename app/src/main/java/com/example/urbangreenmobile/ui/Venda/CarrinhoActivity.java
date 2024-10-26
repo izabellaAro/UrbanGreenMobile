@@ -25,7 +25,8 @@ import retrofit2.Response;
 public class CarrinhoActivity extends AppCompatActivity {
     private ApiInterface apiInterface;
     private RecyclerView recyclerItens;
-    private CarrinhoAdapter carrinhoAdapter;
+    private CarrinhoAdapter carrinhoAdapter = new CarrinhoAdapter(this, getItensCarrinho());
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +34,11 @@ public class CarrinhoActivity extends AppCompatActivity {
         setContentView(R.layout.carrinho_venda);
 
         setupRecyclerView();
-        setupApiInterface();
+    }
+
+    protected void onResume(){
+        super.onResume();
+        carrinhoAdapter.atualizar(getItensCarrinho());
     }
 
     private void setupRecyclerView() {
@@ -42,10 +47,6 @@ public class CarrinhoActivity extends AppCompatActivity {
 
         carrinhoAdapter = new CarrinhoAdapter();
         recyclerItens.setAdapter(carrinhoAdapter);
-    }
-
-    private void setupApiInterface() {
-        apiInterface = ApiService.getClient(new TokenManager(this)).create(ApiInterface.class);
     }
 
     private List<ItemPedido> itensCarrinho = new ArrayList<>();
@@ -65,42 +66,6 @@ public class CarrinhoActivity extends AppCompatActivity {
         }
         return total;
     }
-
-
-    private void enviarItens(ItemPedido itemPedido) {
-        String nomeComprador = ((EditText) findViewById(R.id.nome_comprador)).getText().toString();
-        List<Integer> itensPedidoIds = new ArrayList<>();
-        for (ItemPedido item : getItensCarrinho()) {
-            apiInterface.criarItemPedido(item).enqueue(new Callback<Void>() {
-                @Override
-                public void onResponse(Call<Void> call, Response<Void> response) {
-                    if (response.isSuccessful()) {
-                        //itensPedidoIds.add(response.body());
-                    }
-                }
-
-                @Override
-                public void onFailure(Call<Void> call, Throwable t) {
-                    Toast.makeText(CarrinhoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
-                }
-            });
-        }
-    }
-
-    private void criarPedido(CreatePedidoRequest pedido) {
-        apiInterface.criarPedido(pedido).enqueue(new Callback<Void>() {
-            @Override
-            public void onResponse(Call<Void> call, Response<Void> response) {
-                if (response.isSuccessful()) {
-                    Toast.makeText(CarrinhoActivity.this, "Pedido criado com sucesso", Toast.LENGTH_SHORT).show();
-                }
-            }
-
-            @Override
-            public void onFailure(Call<Void> call, Throwable t) {
-                Toast.makeText(CarrinhoActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
-            }
-        });
-    }
+    
 }
 

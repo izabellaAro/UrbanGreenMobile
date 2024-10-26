@@ -6,7 +6,7 @@ public class CreatePedidoRequest {
     private List<Integer> produtos;
     private String nomeComprador;
 
-    public CreatePedidoRequest(List<Integer> produtos, String nomeComprador) {
+    public CreatePedidoRequest() {
         this.produtos = produtos;
         this.nomeComprador = nomeComprador;
     }

@@ -1,5 +1,6 @@
 package com.example.urbangreenmobile.ui.Venda;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,8 +16,10 @@ import java.util.List;
 
 public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.CarrinhoViewHolder> {
     private List<ItemPedido> itensCarrinho;
+    private Context context;
 
-    public CarrinhoAdapter(List<ItemPedido> itensCarrinho) {
+    public CarrinhoAdapter(Context context, List<ItemPedido> itensCarrinho) {
+        this.context = context;
         this.itensCarrinho = itensCarrinho;
     }
 
@@ -32,12 +35,19 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.Carrin
     @Override
     public void onBindViewHolder(@NonNull CarrinhoViewHolder holder, int position) {
         ItemPedido item = itensCarrinho.get(position);
+        holder.itemNome.setText(item.getProdutoId());
         holder.quantidade.setText(String.valueOf(item.getQuantidade()));
     }
 
     @Override
     public int getItemCount() {
         return itensCarrinho.size();
+    }
+
+    public void atualizar(List<ItemPedido> itensCarrinho){
+        this.itensCarrinho.clear();
+        this.itensCarrinho.addAll(itensCarrinho);
+        notifyDataSetChanged();
     }
 
     public static class CarrinhoViewHolder extends RecyclerView.ViewHolder {

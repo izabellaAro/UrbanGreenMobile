@@ -50,11 +50,11 @@ public class ProducaoActivity extends AppCompatActivity {
             }
         });
 
-       RecyclerView recyclerViewProducao = findViewById(R.id.recyclerViewEditarProducao);
-       recyclerViewProducao.setLayoutManager(new LinearLayoutManager(this));
+      // RecyclerView recyclerViewProducao = findViewById(R.id.recyclerViewEditarProducao);
+      // recyclerViewProducao.setLayoutManager(new LinearLayoutManager(this));
 
        //producaoAdapter = new EditarProducaoAdapter();
-       recyclerViewProducao.setAdapter(producaoAdapter);
+       //recyclerViewProducao.setAdapter(producaoAdapter);
 
         ImageButton editar = findViewById(R.id.edit_button);
         editar.setOnClickListener(this::abrirDialogInspecao);

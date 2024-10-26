@@ -28,10 +28,6 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.EstoqueViewH
         //void onEditClick(List<GetProdutoResponse> produtos);
     }
 
-    public VendaAdapter(List<ItemPedido> itens){
-        this.itens = itens;
-    }
-
     public VendaAdapter() { }
 
     class EstoqueViewHolder extends RecyclerView.ViewHolder {
