@@ -16,6 +16,11 @@ import com.example.urbangreenmobile.api.models.Producao.ItemInspecao;
 
 public class ItemEditarProducaoAdapter extends RecyclerView.Adapter<ItemEditarProducaoAdapter.ViewHolder>{
     private GetInspecaoResponse inspecao;
+    private ConditionMetListener listener;
+
+    public ItemEditarProducaoAdapter(ConditionMetListener listener){
+        this.listener = listener;
+    }
 
     @NonNull
     @Override
@@ -36,6 +41,13 @@ public class ItemEditarProducaoAdapter extends RecyclerView.Adapter<ItemEditarPr
             public void onCheckedChanged(CompoundButton buttonView, boolean isChecked) {
                 item.setRealizado(isChecked);
                 buttonView.setChecked(isChecked);
+
+                boolean ativarCampo = false;
+                if(inspecao.getItens().stream().allMatch(ItemInspecao::isRealizado)){
+                    ativarCampo = true;
+                }
+
+                listener.conditionMet(ativarCampo);
             }
         });
     }
@@ -60,5 +72,9 @@ public class ItemEditarProducaoAdapter extends RecyclerView.Adapter<ItemEditarPr
             nomeItem = itemView.findViewById(R.id.textViewTipoInspecao);
             data = itemView.findViewById(R.id.textViewDataInspecao);
         }
+    }
+
+    public interface ConditionMetListener {
+        void conditionMet(boolean isMet);
     }
 }

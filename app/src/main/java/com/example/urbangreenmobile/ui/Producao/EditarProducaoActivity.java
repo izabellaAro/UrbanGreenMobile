@@ -3,6 +3,7 @@ package com.example.urbangreenmobile.ui.Producao;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
+import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -29,7 +30,7 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
-public class EditarProducaoActivity extends AppCompatActivity {
+public class EditarProducaoActivity extends AppCompatActivity implements ItemEditarProducaoAdapter.ConditionMetListener {
     private ApiInterface apiInterface;
     private RecyclerView recyclerItemEditarProducao;
     private ItemEditarProducaoAdapter itemEditarProducaoAdapter;
@@ -37,6 +38,7 @@ public class EditarProducaoActivity extends AppCompatActivity {
     private GetInspecaoResponse inspecaoResponse;
     private TextView registroInput;
     private ImageButton fecharBotao;
+    private EditText inputColheita;
     private int produtoId;
 
     @Override
@@ -60,6 +62,7 @@ public class EditarProducaoActivity extends AppCompatActivity {
         setupRecyclerView();
         obterInspecao();
         configurarListenerBotaoSalvar();
+        configurarListenerCampoColheita();
     }
 
     private void setupApiInterface() {
@@ -67,7 +70,7 @@ public class EditarProducaoActivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView() {
-        itemEditarProducaoAdapter = new ItemEditarProducaoAdapter();
+        itemEditarProducaoAdapter = new ItemEditarProducaoAdapter(this);
         recyclerItemEditarProducao = findViewById(R.id.recyclerViewEditarProducao);
         recyclerItemEditarProducao.setLayoutManager(new LinearLayoutManager(this));
         recyclerItemEditarProducao.setAdapter(itemEditarProducaoAdapter);
@@ -84,6 +87,7 @@ public class EditarProducaoActivity extends AppCompatActivity {
         UpdateInspecaoRequest request = new UpdateInspecaoRequest();
         request.setProdutoId(inspecaoResponse.getProdutoId());
         request.setRegistro(registroInput.getText().toString());
+        request.setQntColhida(Integer.parseInt(inputColheita.getText().toString()));
 
         List<UpdateItemInspecaoRequest> itens = inspecaoResponse.getItens().stream()
                 .map(item -> new UpdateItemInspecaoRequest(item.getTipoId(), item.isRealizado()))
@@ -152,5 +156,15 @@ public class EditarProducaoActivity extends AppCompatActivity {
                 }
             }
         });
+    }
+
+    private void configurarListenerCampoColheita(){
+        inputColheita = findViewById(R.id.input_colheita);
+        inputColheita.setEnabled(false);
+    }
+
+    @Override
+    public void conditionMet(boolean isMet) {
+        inputColheita.setEnabled(isMet);
     }
 }
