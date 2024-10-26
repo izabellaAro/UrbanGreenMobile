@@ -29,6 +29,8 @@
         <activity android:name=".ui.Home.HomeActivity"/>
         <activity android:name=".ui.Produto.ProdutoActivity" />
         <activity android:name=".ui.Insumo.InsumoActivity" />
+        <activity android:name=".ui.Producao.ProducaoActivity" />
+        <activity android:name=".ui.Producao.EditarProducaoActivity" />
         <activity android:name=".ui.Venda.VendaActivity" />
         <activity android:name=".ui.Venda.CarrinhoActivity" />
 
