@@ -11,16 +11,13 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.urbangreenmobile.R;
 import com.example.urbangreenmobile.api.models.Pedido.ItemPedido;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.CarrinhoViewHolder> {
-    private List<ItemPedido> itensCarrinho;
+    private List<ItemPedido> itensCarrinho = new ArrayList<>();
 
-    public CarrinhoAdapter(List<ItemPedido> itensCarrinho) {
-        this.itensCarrinho = itensCarrinho;
-    }
-
-    public CarrinhoAdapter(){}
+    public CarrinhoAdapter() { }
 
     @NonNull
     @Override
@@ -32,7 +29,12 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.Carrin
     @Override
     public void onBindViewHolder(@NonNull CarrinhoViewHolder holder, int position) {
         ItemPedido item = itensCarrinho.get(position);
-        holder.quantidade.setText(String.valueOf(item.getQuantidade()));
+        holder.itemNome.setText(holder.itemNome.getText() + item.getNomeProduto());
+        holder.quantidade.setText(holder.quantidade.getText() + String.valueOf(item.getQuantidade()));
+    }
+
+    public void setItensCarrinho(List<ItemPedido> itensCarrinho){
+        this.itensCarrinho = itensCarrinho;
     }
 
     @Override

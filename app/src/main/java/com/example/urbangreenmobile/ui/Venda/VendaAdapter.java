@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import androidx.lifecycle.LifecycleOwner;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbangreenmobile.R;
@@ -18,21 +19,91 @@ import com.example.urbangreenmobile.api.models.Produto.GetProdutoResponse;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.EstoqueViewHolder> {
     private List<GetProdutoResponse> produtos = new ArrayList<>();
-    private List<ItemPedido> itens;
-    private VendaAdapter.OnEditClickListener onEditClickListener;
+    private List<ItemPedido> itensPedido = new ArrayList<>();
 
-    public interface OnEditClickListener {
-        //void onEditClick(List<GetProdutoResponse> produtos);
+    public VendaAdapter(LifecycleOwner lifecycleOwner, VendaSharedViewModel sharedViewModel) {
+        sharedViewModel.getItems().observe(lifecycleOwner, this::setItensPedido);
     }
 
-    public VendaAdapter(List<ItemPedido> itens){
-        this.itens = itens;
+    private void alterarQuantidadeItem(EstoqueViewHolder holder, GetProdutoResponse produto,
+                                       boolean adicionar){
+        Optional<ItemPedido> itemOptional = itensPedido.stream()
+                .filter(x -> x.getProdutoId() == produto.getId()).findFirst();
+
+        ItemPedido itemPedido;
+
+        if (!itemOptional.isPresent()){
+            itemPedido = new ItemPedido();
+            itemPedido.setProdutoId(produto.getId());
+            itemPedido.setNomeProduto(produto.getNome());
+            itensPedido.add(itemPedido);
+        } else {
+            itemPedido = itemOptional.get();
+        }
+
+        int quantidade = itemPedido.getQuantidade();
+
+        if (adicionar){
+            quantidade++;
+        } else {
+            quantidade--;
+        }
+
+        itemPedido.setQuantidade(quantidade);
+        holder.quantidade.setText(String.valueOf(itemPedido.getQuantidade()));
     }
 
-    public VendaAdapter() { }
+    private void configurarListeners(EstoqueViewHolder holder, GetProdutoResponse produto){
+        holder.btnAdicionar
+                .setOnClickListener(v -> alterarQuantidadeItem(holder, produto, true));
+
+        holder.btnDiminuir
+                .setOnClickListener(v -> alterarQuantidadeItem(holder, produto, false));
+    }
+
+    private void preencherItens(EstoqueViewHolder holder, GetProdutoResponse produto){
+        holder.itemName.setText(produto.getNome());
+        byte[] imageBytes = Base64.decode(produto.getImagemBase64(), Base64.DEFAULT);
+        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
+        holder.itemImage.setImageBitmap(bitmap);
+        holder.quantidade.setText(String.valueOf(0));
+    }
+
+    @Override
+    public EstoqueViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+        View view = LayoutInflater.from(parent.getContext())
+                .inflate(R.layout.item_venda, parent, false);
+        return new EstoqueViewHolder(view);
+    }
+
+    @Override
+    public void onBindViewHolder(EstoqueViewHolder holder, int position) {
+        GetProdutoResponse produto = produtos.get(position);
+
+        if (produto == null) return;
+
+        preencherItens(holder, produto);
+        configurarListeners(holder, produto);
+    }
+
+    public void setProdutos(List<GetProdutoResponse> produtos) {
+        this.produtos = produtos;
+        notifyDataSetChanged();
+    }
+
+    public void setItensPedido(List<ItemPedido> itens) {
+        this.itensPedido = itens;
+        notifyDataSetChanged();
+    }
+
+    @Override
+    public int getItemCount() {
+        return produtos.size();
+    }
 
     class EstoqueViewHolder extends RecyclerView.ViewHolder {
         public ImageView itemImage;
@@ -47,48 +118,5 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.EstoqueViewH
             btnDiminuir = itemView.findViewById(R.id.btn_diminuir);
             btnAdicionar = itemView.findViewById(R.id.btn_adicionar);
         }
-    }
-
-    @Override
-    public EstoqueViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_venda, parent, false);
-        return new EstoqueViewHolder(view);
-    }
-
-    @Override
-    public void onBindViewHolder(EstoqueViewHolder holder, int position) {
-        GetProdutoResponse currentItem = produtos.get(position);
-        //ItemPedido item = itens.get(position);
-        final int[] count = {0};
-
-        holder.itemName.setText(currentItem.getNome());
-
-        byte[] imageBytes = Base64.decode(currentItem.getImagemBase64(), Base64.DEFAULT);
-        Bitmap bitmap = BitmapFactory.decodeByteArray(imageBytes, 0, imageBytes.length);
-        holder.itemImage.setImageBitmap(bitmap);
-
-        holder.btnAdicionar.setOnClickListener(v -> {
-            count[0]++;
-            holder.quantidade.setText(String.valueOf(count[0]));
-        });
-
-        holder.btnDiminuir.setOnClickListener(v -> {
-            count[0]--;
-            holder.quantidade.setText(String.valueOf(count[0]));
-        });
-    }
-
-    public void setOnEditClickListener(VendaAdapter.OnEditClickListener onEditClickListener) {
-        this.onEditClickListener = onEditClickListener;
-    }
-
-    public void setProdutos(List<GetProdutoResponse> produtos) {
-        this.produtos = produtos;
-        notifyDataSetChanged();
-    }
-
-    @Override
-    public int getItemCount() {
-        return produtos.size();
     }
 }

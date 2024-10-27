@@ -3,20 +3,15 @@ package com.example.urbangreenmobile.api.models.Pedido;
 import java.util.List;
 
 public class CreatePedidoRequest {
-    private List<Integer> produtos;
+    private List<ItemPedidoRequest> itens;
     private String nomeComprador;
 
-    public CreatePedidoRequest(List<Integer> produtos, String nomeComprador) {
-        this.produtos = produtos;
-        this.nomeComprador = nomeComprador;
+    public List<ItemPedidoRequest> getItens() {
+        return itens;
     }
 
-    public List<Integer> getProdutos() {
-        return produtos;
-    }
-
-    public void setProdutos(List<Integer> produtos) {
-        this.produtos = produtos;
+    public void setItens(List<ItemPedidoRequest> itens) {
+        this.itens = itens;
     }
 
     public String getNomeComprador() {

@@ -1,11 +1,15 @@
 package com.example.urbangreenmobile.api.models.Pedido;
 
 public class ItemPedido {
-    private int quantidade;
+    private String nomeProduto;
     private int produtoId;
+    private int quantidade;
 
-    public ItemPedido(int quantidade, int produtoId) {
-        this.quantidade = quantidade;
+    public int getProdutoId() {
+        return produtoId;
+    }
+
+    public void setProdutoId(int produtoId) {
         this.produtoId = produtoId;
     }
 
@@ -17,13 +21,11 @@ public class ItemPedido {
         this.quantidade = quantidade;
     }
 
-    public int getProdutoId() {
-        return produtoId;
+    public String getNomeProduto() {
+        return nomeProduto;
     }
 
-    public void setProdutoId(int produtoId) {
-        this.produtoId = produtoId;
+    public void setNomeProduto(String nomeProduto) {
+        this.nomeProduto = nomeProduto;
     }
 }
-
-
