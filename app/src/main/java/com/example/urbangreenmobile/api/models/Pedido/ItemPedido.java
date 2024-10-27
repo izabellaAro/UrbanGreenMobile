@@ -13,6 +13,8 @@ public class ItemPedido {
         this.produtoId = produtoId;
     }
 
+    public ItemPedido(){}
+
     public int getQuantidade() {
         return quantidade;
     }

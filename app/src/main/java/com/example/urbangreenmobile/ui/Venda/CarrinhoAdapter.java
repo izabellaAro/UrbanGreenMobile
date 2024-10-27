@@ -1,5 +1,6 @@
 package com.example.urbangreenmobile.ui.Venda;
 
+import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,6 +41,12 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.Carrin
     @Override
     public int getItemCount() {
         return itensCarrinho.size();
+    }
+
+    public void atualizar(List<ItemPedido> itensCarrinho){
+        this.itensCarrinho.clear();
+        this.itensCarrinho.addAll(itensCarrinho);
+        notifyDataSetChanged();
     }
 
     public static class CarrinhoViewHolder extends RecyclerView.ViewHolder {
