@@ -18,12 +18,4 @@ public class VendaSharedViewModel extends ViewModel {
     public void setItems(List<ItemPedido> itemList) {
         items.setValue(itemList);
     }
-
-    public void updateItem(ItemPedido updatedItem, int position) {
-        List<ItemPedido> currentItems = items.getValue();
-        if (currentItems != null) {
-            currentItems.set(position, updatedItem);
-            items.setValue(currentItems);  // Notifica os observadores
-        }
-    }
 }

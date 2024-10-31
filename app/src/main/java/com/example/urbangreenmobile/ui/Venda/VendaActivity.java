@@ -32,6 +32,7 @@ public class VendaActivity extends AppCompatActivity {
     private RecyclerView recyclerViewEstoque;
     private VendaAdapter vendaAdapter;
     private VendaSharedViewModel sharedViewModel;
+    private EditText inputFiltro;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,6 +48,15 @@ public class VendaActivity extends AppCompatActivity {
         vendaAdapter = new VendaAdapter(this, sharedViewModel);
         listarProdutos();
         setupRecyclerView();
+
+        inputFiltro = findViewById(R.id.search_input);
+
+        inputFiltro.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+            }
+        });
     }
 
     private void setupRecyclerView() {
@@ -118,6 +128,23 @@ public class VendaActivity extends AppCompatActivity {
         itensCarrinho.forEach(item
                 -> itensPedido.add(new ItemPedidoRequest(item.getQuantidade(), item.getProdutoId())));
 
-        pedidoRequest.setItens(itensPedido);
+        pedidoRequest.setItensPedido(itensPedido);
+
+        apiInterface.criarPedido(pedidoRequest).enqueue(new Callback<Void>() {
+            @Override
+            public void onResponse(Call<Void> call, Response<Void> response) {
+                if (response.isSuccessful()) {
+                    Toast.makeText(VendaActivity.this, "Pedido criado com sucesso", Toast.LENGTH_SHORT).show();
+                    recreate();
+                } else {
+                    Toast.makeText(VendaActivity.this, "Erro ao criar pedido", Toast.LENGTH_SHORT).show();
+                }
+            }
+
+            @Override
+            public void onFailure(Call<Void> call, Throwable t) {
+                Toast.makeText(VendaActivity.this, "Erro de rede", Toast.LENGTH_SHORT).show();
+            }
+        });
     }
 }

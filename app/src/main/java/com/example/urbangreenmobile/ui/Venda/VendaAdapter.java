@@ -47,14 +47,14 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.EstoqueViewH
 
         int quantidade = itemPedido.getQuantidade();
 
-        if (adicionar){
-            quantidade++;
-        } else {
-            quantidade--;
-        }
+        quantidade = adicionar ? quantidade + 1 : quantidade - 1;
 
+        holder.alterarQuantidade(quantidade, produto.getQuantidade());
         itemPedido.setQuantidade(quantidade);
-        holder.quantidade.setText(String.valueOf(itemPedido.getQuantidade()));
+
+        if (quantidade <= 0){
+            itensPedido.remove(itemPedido);
+        }
     }
 
     private void configurarListeners(EstoqueViewHolder holder, GetProdutoResponse produto){
@@ -116,7 +116,34 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.EstoqueViewH
             itemName = itemView.findViewById(R.id.item_nome);
             quantidade = itemView.findViewById(R.id.quantidade);
             btnDiminuir = itemView.findViewById(R.id.btn_diminuir);
+            AlterarStatusBotaoDiminuir(false);
             btnAdicionar = itemView.findViewById(R.id.btn_adicionar);
+        }
+
+        public void alterarQuantidade(int quantidadeItem, int quantidadeProduto){
+            AlterarStatusBotaoAdicionar(quantidadeItem <= quantidadeProduto);
+            AlterarStatusBotaoDiminuir(quantidadeItem > 0);
+            quantidade.setText(String.valueOf(quantidadeItem));
+        }
+
+        public void AlterarStatusBotaoAdicionar(boolean ativado){
+            if (ativado){
+                btnAdicionar.setEnabled(true);
+                btnAdicionar.setAlpha(1);
+            } else {
+                btnAdicionar.setEnabled(false);
+                btnAdicionar.setAlpha(0.5f);
+            }
+        }
+
+        public void AlterarStatusBotaoDiminuir(boolean ativado){
+            if (ativado){
+                btnDiminuir.setEnabled(true);
+                btnDiminuir.setAlpha(1);
+            } else {
+                btnDiminuir.setEnabled(false);
+                btnDiminuir.setAlpha(0.5f);
+            }
         }
     }
 }
