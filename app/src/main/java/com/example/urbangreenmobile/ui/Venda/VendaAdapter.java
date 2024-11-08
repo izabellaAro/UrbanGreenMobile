@@ -40,6 +40,7 @@ public class VendaAdapter extends RecyclerView.Adapter<VendaAdapter.EstoqueViewH
             itemPedido = new ItemPedido();
             itemPedido.setProdutoId(produto.getId());
             itemPedido.setNomeProduto(produto.getNome());
+            itemPedido.setValor(produto.getValor());
             itensPedido.add(itemPedido);
         } else {
             itemPedido = itemOptional.get();

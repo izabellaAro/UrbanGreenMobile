@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
@@ -13,19 +14,23 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.urbangreenmobile.R;
+import com.example.urbangreenmobile.api.models.Pedido.ItemPedido;
 
-public class CarrinhoFragment extends DialogFragment {
+import java.util.List;
+
+public class CarrinhoFragment extends DialogFragment implements CarrinhoAdapter.OnProductUpdateListener {
     private RecyclerView recyclerItens;
     private CarrinhoAdapter carrinhoAdapter;
     private VendaSharedViewModel sharedViewModel;
+    private View view;
 
     @Nullable
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container,
                              @Nullable Bundle savedInstanceState) {
-        View view = inflater.inflate(R.layout.carrinho_venda, container, false);
+        view = inflater.inflate(R.layout.carrinho_venda, container, false);
 
-        carrinhoAdapter = new CarrinhoAdapter();
+        carrinhoAdapter = new CarrinhoAdapter(this);
 
         setupRecyclerView(view);
 
@@ -49,5 +54,11 @@ public class CarrinhoFragment extends DialogFragment {
         recyclerItens.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerItens.setAdapter(carrinhoAdapter);
     }
-}
 
+    @Override
+    public void OnProductUpdateListener(List<ItemPedido> pedidos) {
+        double total = pedidos.stream().mapToDouble(ItemPedido::getValorTotal).sum();
+        TextView totalTextView = view.findViewById(R.id.total);
+        totalTextView.setText("Total: " + String.valueOf(total));
+    }
+}

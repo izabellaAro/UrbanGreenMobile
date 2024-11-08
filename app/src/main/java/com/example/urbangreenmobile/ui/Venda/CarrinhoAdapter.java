@@ -16,8 +16,9 @@ import java.util.List;
 
 public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.CarrinhoViewHolder> {
     private List<ItemPedido> itensCarrinho = new ArrayList<>();
+    private final OnProductUpdateListener listener;
 
-    public CarrinhoAdapter() { }
+    public CarrinhoAdapter(OnProductUpdateListener listener) { this.listener = listener; }
 
     @NonNull
     @Override
@@ -31,6 +32,7 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.Carrin
         ItemPedido item = itensCarrinho.get(position);
         holder.itemNome.setText(holder.itemNome.getText() + item.getNomeProduto());
         holder.quantidade.setText(holder.quantidade.getText() + String.valueOf(item.getQuantidade()));
+        listener.OnProductUpdateListener(itensCarrinho);
     }
 
     public void setItensCarrinho(List<ItemPedido> itensCarrinho){
@@ -50,6 +52,10 @@ public class CarrinhoAdapter extends RecyclerView.Adapter<CarrinhoAdapter.Carrin
             quantidade = itemView.findViewById(R.id.quantidade);
             itemNome = itemView.findViewById(R.id.nome_item);
         }
+    }
+
+    public interface OnProductUpdateListener {
+        void OnProductUpdateListener(List<ItemPedido> pedidos);
     }
 }
 
