@@ -87,7 +87,12 @@ public class EditarProducaoActivity extends AppCompatActivity implements ItemEdi
         UpdateInspecaoRequest request = new UpdateInspecaoRequest();
         request.setProdutoId(inspecaoResponse.getProdutoId());
         request.setRegistro(registroInput.getText().toString());
-        request.setQntColhida(Integer.parseInt(inputColheita.getText().toString()));
+
+        String colheitaInput = inputColheita.getText().toString();
+
+        if (!colheitaInput.isEmpty()){
+            request.setQntColhida(Integer.parseInt(colheitaInput));
+        }
 
         List<UpdateItemInspecaoRequest> itens = inspecaoResponse.getItens().stream()
                 .map(item -> new UpdateItemInspecaoRequest(item.getTipoId(), item.isRealizado()))
