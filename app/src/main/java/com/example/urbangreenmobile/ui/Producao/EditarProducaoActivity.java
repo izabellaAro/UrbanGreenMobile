@@ -95,7 +95,7 @@ public class EditarProducaoActivity extends AppCompatActivity implements ItemEdi
         }
 
         List<UpdateItemInspecaoRequest> itens = inspecaoResponse.getItens().stream()
-                .map(item -> new UpdateItemInspecaoRequest(item.getTipoId(), item.isRealizado()))
+                .map(item -> new UpdateItemInspecaoRequest(item.getTipoId(), item.isRealizado(), item.getData()))
                 .collect(Collectors.toList());
 
         request.setItens(itens);
@@ -124,7 +124,7 @@ public class EditarProducaoActivity extends AppCompatActivity implements ItemEdi
         request.setRegistro(registroInput.getText().toString());
 
         List<UpdateItemInspecaoRequest> itens = inspecaoResponse.getItens().stream()
-                .map(item -> new UpdateItemInspecaoRequest(item.getTipoId(), item.isRealizado()))
+                .map(item -> new UpdateItemInspecaoRequest(item.getTipoId(), item.isRealizado(), item.getData()))
                 .collect(Collectors.toList());
 
         request.setItens(itens);
