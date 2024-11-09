@@ -30,7 +30,7 @@ import retrofit2.http.Part;
 import retrofit2.http.Path;
 
 public interface ApiInterface {
-    @POST("Login/login")
+    @POST("Login")
     Call<LoginResponse> login(@Body LoginRequest loginRequest);
 
     @GET("Fornecedor?skip=0&take=50")
