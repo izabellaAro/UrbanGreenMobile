@@ -5,7 +5,8 @@ import java.util.List;
 public class UpdateInspecaoRequest {
     private int produtoId;
     private String registro;
-    private List<ItemInspecao> itens;
+    private int qntColhida;
+    private List<UpdateItemInspecaoRequest> itens;
 
     // Getters and Setters
     public int getProdutoId() {
@@ -24,12 +25,20 @@ public class UpdateInspecaoRequest {
         this.registro = registro;
     }
 
-    public List<ItemInspecao> getItens() {
+    public List<UpdateItemInspecaoRequest> getItens() {
         return itens;
     }
 
-    public void setItens(List<ItemInspecao> itens) {
+    public void setItens(List<UpdateItemInspecaoRequest> itens) {
         this.itens = itens;
+    }
+
+    public int getQntColhida() {
+        return qntColhida;
+    }
+
+    public void setQntColhida(int qntColhida) {
+        this.qntColhida = qntColhida;
     }
 }
 
