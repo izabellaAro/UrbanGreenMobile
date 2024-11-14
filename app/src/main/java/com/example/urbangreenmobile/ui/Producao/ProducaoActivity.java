@@ -34,17 +34,6 @@ public class ProducaoActivity extends AppCompatActivity implements OnItemButtonC
         setupRecyclerView();
         setupApiInterface();
         listarProdutos();
-
-//        editTextDataFiltro = findViewById(R.id.editTextDataFiltro);
-
-//        findViewById(R.id.editTextDataFiltro).setOnClickListener(v -> {
-//            String dataFiltro = editTextDataFiltro.getText().toString();
-//            if (!dataFiltro.isEmpty()) {
-//                //filtrarInspecoesPorData(dataFiltro);
-//            } else {
-//                Toast.makeText(this, "Por favor, insira uma data válida", Toast.LENGTH_SHORT).show();
-//            }
-//        });
     }
 
     @Override

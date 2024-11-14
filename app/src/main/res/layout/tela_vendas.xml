@@ -35,8 +35,8 @@
 
         <EditText
             android:id="@+id/search_input"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="185dp"
+            android:layout_height="20dp"
             android:layout_marginStart="20dp"
             android:elevation="2sp"
             android:enabled="true"
@@ -57,7 +57,7 @@
         <EditText
             android:id="@+id/nome_comprador"
             android:layout_width="0dp"
-            android:layout_height="wrap_content"
+            android:layout_height="40dp"
             android:layout_weight="1"
             android:background="@drawable/background_inputtext"
             android:hint="Nome do comprador"
